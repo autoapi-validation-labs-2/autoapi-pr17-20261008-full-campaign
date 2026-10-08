@@ -7,7 +7,7 @@ on:
         type: choice
         required: true
         default: infrastructure
-        options: [infrastructure, preflight, full, baseline]
+        options: [infrastructure, preflight, full, baseline, upstream_control]
       candidate_limit:
         type: choice
         required: true
@@ -59,7 +59,7 @@ jobs:
           name: infrastructure-preflight
           path: encrypted-evidence/*
   repository:
-    if: inputs.phase == 'full' || inputs.phase == 'baseline'
+    if: inputs.phase == 'full' || inputs.phase == 'baseline' || inputs.phase == 'upstream_control'
     runs-on: ubuntu-24.04
     timeout-minutes: 150
     environment: oss25-current-20261008
@@ -188,6 +188,9 @@ jobs:
           OSS25_OPERATOR_TOKEN: ${{ secrets.OSS25_OPERATOR_TOKEN }}
           OSS25_MODEL_API_KEY: ${{ secrets.OSS25_MODEL_API_KEY }}
         run: |
+          if [ "$TARGET_TEST_PHASE" = upstream_control ]; then
+            exec sudo --preserve-env=PATH,GITHUB_WORKSPACE,TARGET_SOURCE,TARGET_CANDIDATE_LIMIT,OSS25_OPERATOR_TOKEN,OSS25_MODEL_API_KEY /usr/bin/env PATH="$PATH" python3 /opt/oss25/harness/driver.py --upstream-control
+          fi
           if [ "$TARGET_TEST_PHASE" = baseline ]; then
             exec sudo --preserve-env=PATH,GITHUB_WORKSPACE,TARGET_SOURCE,TARGET_CANDIDATE_LIMIT,OSS25_OPERATOR_TOKEN,OSS25_MODEL_API_KEY /usr/bin/env PATH="$PATH" python3 /opt/oss25/harness/driver.py --baseline
           fi

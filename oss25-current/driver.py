@@ -34,7 +34,8 @@ if '--preflight' in sys.argv:
  record['finished_at']=now();(out/'infrastructure-preflight.json').write_text(redact(json.dumps(record,indent=2))+'\n')
  print(json.dumps(record));sys.exit(0 if record['status']=='passed' else 2)
 item=next(i for i in inventory if i['source']==os.environ['TARGET_SOURCE'])
-baseline_mode='--baseline' in sys.argv
+upstream_mode='--upstream-control' in sys.argv
+baseline_mode='--baseline' in sys.argv or upstream_mode
 limit=os.environ.get('TARGET_CANDIDATE_LIMIT','all') or 'all'
 if limit not in ['all','3']:raise RuntimeError('Unapproved candidate limit')
 limit_arg='2147483647' if limit=='all' else '3'
@@ -85,7 +86,7 @@ try:
  report['runtime_php']=execute(['php','--version']).splitlines()[0]
  command=[node,'--import',str(product/'packages/part-a/node_modules/tsx/dist/loader.mjs'),str(product/'scripts/run-dovel-flow.mjs'),'--secrets-stdin','--repository',str(source),'--owner',item['test_repository'].split('/')[0],'--name',item['test_repository'].split('/')[1],'--max-candidates',limit_arg,'--max-runtime-minutes','60','--open-pr','true','--output-dir',str(out)]
  if baseline_mode:
-  command=[node,'--import',str(product/'packages/part-a/node_modules/tsx/dist/loader.mjs'),str(ROOT/'baseline_controller.mjs'),str(product),str(source),str(out)]
+  command=[node,'--import',str(product/'packages/part-a/node_modules/tsx/dist/loader.mjs'),str(ROOT/('upstream_control.mjs' if upstream_mode else 'baseline_controller.mjs')),str(product),str(source),str(out)]
   report['command_path']='independent unchanged-source baseline control; no model requests or publication'
  report['node_heap_limit_mib']=10240
  report['host_memtotal_kib']=next(line.split(':',1)[1].strip() for line in pathlib.Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemTotal:'))
