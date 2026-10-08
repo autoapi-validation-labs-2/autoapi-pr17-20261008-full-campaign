@@ -1,0 +1,5 @@
+{
+  "nodejs/undici": [
+    "nightly-2026-07-29"
+  ]
+}

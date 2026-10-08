@@ -1,0 +1,177 @@
+[
+  {
+    "source": "axios/axios",
+    "source_sha": "28e9b84ac59c034260c1927f4a0b7c022b6b0071",
+    "source_tree": "08eb715d521d6bd3d5ecb900ade67b5c4d7fe06c",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-axios-axios",
+    "default_branch": "v1.x"
+  },
+  {
+    "source": "expressjs/express",
+    "source_sha": "7ef98448f8b38099ab1ded55e458538ad47a51e7",
+    "source_tree": "aa5a18060047874ea003bb8680611250a595d39e",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-expressjs-express",
+    "default_branch": "master"
+  },
+  {
+    "source": "fastify/fastify",
+    "source_sha": "0d945819bebc08f4ca666d8283c03a26ed9706a0",
+    "source_tree": "2e5ef1d60d0020414495c1ddcc89b754e84816d7",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-fastify-fastify",
+    "default_branch": "main"
+  },
+  {
+    "source": "eslint/eslint",
+    "source_sha": "e5aea414cc00555ecd43f6e608bf80e0f9a6d4d6",
+    "source_tree": "1a243003906c227d86d16599cf72b5ed82a0902e",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-eslint-eslint",
+    "default_branch": "main"
+  },
+  {
+    "source": "nodejs/undici",
+    "source_sha": "1e3e94e954f7c571bda74ce52c10eefa64ef98ff",
+    "source_tree": "760b9736f820b489690f4686f60319b65aa7c83c",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-nodejs-undici",
+    "default_branch": "main"
+  },
+  {
+    "source": "vitejs/vite",
+    "source_sha": "fea5b21dd9524ed7308632407b996f1fe5942c9c",
+    "source_tree": "a326e9ed0cd038594cec76e5be6c80eb951d25ae",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-vitejs-vite",
+    "default_branch": "main"
+  },
+  {
+    "source": "sveltejs/svelte",
+    "source_sha": "3f885e30161bebd61939fb02065d539c76369398",
+    "source_tree": "ce2fe9cbc6aedae4df694865830f4cb9f7613818",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-sveltejs-svelte",
+    "default_branch": "main"
+  },
+  {
+    "source": "vuejs/core",
+    "source_sha": "4ab865a848a1da3d10fb674f857e5fff13094644",
+    "source_tree": "35a58db0e23da8cd91569cc563c274073642b6d4",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-vuejs-core",
+    "default_branch": "main"
+  },
+  {
+    "source": "elysiajs/elysia",
+    "source_sha": "e037eca710e7ad193be09cc6615ab0dbe54af914",
+    "source_tree": "c0959135c36ebbaa4a3c652982664966da8c95bc",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-elysiajs-elysia",
+    "default_branch": "main"
+  },
+  {
+    "source": "trpc/trpc",
+    "source_sha": "d756e591a5e37ef20b8d75ecd4d736c195497289",
+    "source_tree": "7b8b4b32071828d83aac0458e79f4de7ffdaf74e",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-trpc-trpc",
+    "default_branch": "main"
+  },
+  {
+    "source": "pallets/flask",
+    "source_sha": "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35",
+    "source_tree": "d46b1a2a2cc4219b0ad5060ab618e9f5ae635680",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-pallets-flask",
+    "default_branch": "main"
+  },
+  {
+    "source": "encode/httpx",
+    "source_sha": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+    "source_tree": "31ba94512339180efacceacc0646b56ee15eba63",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-encode-httpx",
+    "default_branch": "master"
+  },
+  {
+    "source": "fastapi/fastapi",
+    "source_sha": "6e659e84de09ee06e0499141f7f4951f478ddbac",
+    "source_tree": "b05103c5e2840cd62d4569942caa5b57b685def4",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-fastapi-fastapi",
+    "default_branch": "master"
+  },
+  {
+    "source": "gin-gonic/gin",
+    "source_sha": "43fe48e8a0f44af783116cdb010725e6bb50255f",
+    "source_tree": "895f98dfe0d3f21c3a55c0814995eedaf4989c99",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-gin-gonic-gin",
+    "default_branch": "master"
+  },
+  {
+    "source": "go-chi/chi",
+    "source_sha": "167e1e3bd039d060696b99c8da4e876ae04f42c1",
+    "source_tree": "78ea402444f50acbf2de96c413503d75ef8b6e54",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-go-chi-chi",
+    "default_branch": "master"
+  },
+  {
+    "source": "labstack/echo",
+    "source_sha": "296824015d4a6345531fa71e9233fd42879f2c69",
+    "source_tree": "5dbee64b7700fb53d0385e283add0f7b48fcb574",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-labstack-echo",
+    "default_branch": "master"
+  },
+  {
+    "source": "gofiber/fiber",
+    "source_sha": "72a4d45b2875a8271ff318b2ac10ee53217991db",
+    "source_tree": "ffa93f95bcdc33c4917a26d7561527377e9eb50d",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-gofiber-fiber",
+    "default_branch": "main"
+  },
+  {
+    "source": "sharkdp/bat",
+    "source_sha": "4608fc959aa8abf80d32198836511a570b7ae9ea",
+    "source_tree": "d6f24e4b0f2a3d6fd82e76b065da3f9f4a7fd84c",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-sharkdp-bat",
+    "default_branch": "master"
+  },
+  {
+    "source": "BurntSushi/ripgrep",
+    "source_sha": "3fce3b5bb0236da2df6d99672afb8a719642eca7",
+    "source_tree": "856ed9162d23416ee7dc5f4389975b54ca062f60",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-burntsushi-ripgrep",
+    "default_branch": "master"
+  },
+  {
+    "source": "puma/puma",
+    "source_sha": "e17bc91ea500c8c643295208f4444bf454ae1b8c",
+    "source_tree": "6afc347892230c226caeb1e19afe3d099990cb6e",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-puma-puma",
+    "default_branch": "main"
+  },
+  {
+    "source": "sinatra/sinatra",
+    "source_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+    "source_tree": "96851f3f7a72f9b05c096b1d7165b7f079878acd",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-sinatra-sinatra",
+    "default_branch": "main"
+  },
+  {
+    "source": "slimphp/Slim",
+    "source_sha": "3675bf6baac66b07032575b7bef4200b60b7974b",
+    "source_tree": "7ec36d9648a03f0988c0e8077f9dbca499799d67",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-slimphp-slim",
+    "default_branch": "4.x"
+  },
+  {
+    "source": "guzzle/guzzle",
+    "source_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+    "source_tree": "4599f56eb184603c924f56c56486a95a71559ea8",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-guzzle-guzzle",
+    "default_branch": "8.2"
+  },
+  {
+    "source": "elixir-plug/plug",
+    "source_sha": "73404f851852a00ffb2014be95d4598900fa77b8",
+    "source_tree": "9083c57f338d931774b5070cec6736a3c09b5844",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-elixir-plug-plug",
+    "default_branch": "main"
+  },
+  {
+    "source": "google/gson",
+    "source_sha": "845664ba1c307e6c1910d07cfed2f622e0ad8df1",
+    "source_tree": "2e4eb85b5b5587d5d95ac1b3d830d5113a16fa14",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-google-gson",
+    "default_branch": "main"
+  }
+]

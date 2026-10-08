@@ -1,0 +1,211 @@
+name: PR17 updated 25-repository full campaign
+run-name: PR17 db16e1a8 25 repos ${{ inputs.phase }}
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        type: choice
+        required: true
+        default: infrastructure
+        options: [infrastructure, preflight, full]
+      candidate_limit:
+        type: choice
+        required: true
+        default: all
+        options: [all]
+      repositories:
+        type: string
+        required: true
+        default: '["axios/axios", "expressjs/express", "fastify/fastify", "eslint/eslint", "nodejs/undici", "vitejs/vite", "sveltejs/svelte", "vuejs/core", "elysiajs/elysia", "trpc/trpc", "pallets/flask", "encode/httpx", "fastapi/fastapi", "gin-gonic/gin", "go-chi/chi", "labstack/echo", "gofiber/fiber", "sharkdp/bat", "BurntSushi/ripgrep", "puma/puma", "sinatra/sinatra", "slimphp/Slim", "guzzle/guzzle", "elixir-plug/plug", "google/gson"]'
+permissions:
+  contents: read
+jobs:
+  infrastructure:
+    if: inputs.phase == 'infrastructure'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Verify native Linux memory and credential isolation
+        run: |
+          set -euo pipefail
+          sudo sysctl -w kernel.yama.ptrace_scope=2
+          test "$(cat /proc/sys/kernel/yama/ptrace_scope)" = 2
+          test "$(awk '/MemTotal/ {print $2}' /proc/meminfo)" -ge 14680064
+          uname -m
+          free -h
+          df -h /
+  preflight:
+    if: inputs.phase == 'preflight'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: oss25-current-20261008
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify current model endpoints and25write destinations
+        env:
+          OSS25_OPERATOR_TOKEN: ${{ secrets.OSS25_OPERATOR_TOKEN }}
+          OSS25_MODEL_API_KEY: ${{ secrets.OSS25_MODEL_API_KEY }}
+        run: exec sudo --preserve-env=PATH,GITHUB_WORKSPACE,OSS25_OPERATOR_TOKEN,OSS25_MODEL_API_KEY /usr/bin/env PATH="$PATH" python3 oss25-current/driver.py --preflight
+      - name: Encrypt preflight evidence
+        if: always()
+        env:
+          OSS25_MODEL_API_KEY: ${{ secrets.OSS25_MODEL_API_KEY }}
+        run: python3 oss25-current/encrypt_evidence.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: infrastructure-preflight
+          path: encrypted-evidence/*
+  repository:
+    if: inputs.phase == 'full'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    environment: oss25-current-20261008
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        source: ${{ fromJSON(inputs.repositories) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: harness
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Test364758697/Automated-API-and-Data
+          token: ${{ secrets.OSS25_OPERATOR_TOKEN }}
+          ref: db16e1a8f6372cdd47c018a5ac537b88ad9cda69
+          path: product
+          persist-credentials: false
+      - name: Prepare isolated Linux host and writable capacity
+        run: |
+          set -euo pipefail
+          sudo sysctl -w kernel.yama.ptrace_scope=2
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          sudo useradd --create-home --shell /bin/bash autoapitest
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /usr/share/swift
+          curl -fsSL -o /tmp/bun.zip https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-linux-x64.zip
+          echo "36368faef7527875d5ffa52e53cd48021741f2a83eb6208a8dd64068d422a913  /tmp/bun.zip" | sha256sum --check -
+          unzip -q /tmp/bun.zip -d /tmp/bun-runtime
+          sudo install -m 0755 /tmp/bun-runtime/bun-linux-x64/bun /usr/local/bin/bun
+          sudo ln -s /usr/local/bin/bun /usr/local/bin/bunx
+          curl -fsSL -o /tmp/deno.zip https://github.com/denoland/deno/releases/download/v2.9.7/deno-x86_64-unknown-linux-gnu.zip
+          echo "c6527f24f4b16031d3ae4fa9f658d5f11534c8d84ce7dc8502420280919c3490  /tmp/deno.zip" | sha256sum --check -
+          unzip -q /tmp/deno.zip -d /tmp/deno-runtime
+          sudo install -m 0755 /tmp/deno-runtime/deno /usr/local/bin/deno
+          test "$(awk '/MemTotal/ {print $2}' /proc/meminfo)" -ge 14680064
+          df -h /
+          free -h
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ruby-dev libyaml-dev libffi-dev libssl-dev composer php-curl php-xml php-mbstring php-zip php-sqlite3 elixir erlang-dev maven python3-venv
+          sudo -u autoapitest sudo -n true && exit 1 || true
+      - uses: shivammathur/setup-php@b604ade2a87db23f8871b7182e69ec5e75effb45
+        if: matrix.source == 'slimphp/Slim' || matrix.source == 'guzzle/guzzle'
+        with:
+          php-version: ${{ matrix.source == 'guzzle/guzzle' && '7.4' || '8.3' }}
+          extensions: mbstring, intl, curl, xml, zip, sqlite3
+          coverage: xdebug
+          tools: composer:2.8
+        env:
+          update: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.source == 'trpc/trpc' && '24.21.0' || '24.20.0' }}
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.source == 'labstack/echo' && '1.27.1' || '1.26.5' }}
+          cache: false
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.source == 'pallets/flask' && '3.10' || '3.12' }}
+      - uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124
+        if: matrix.source == 'elixir-plug/plug'
+        with:
+          otp-version: '27.3'
+          elixir-version: '1.18.4'
+      - name: Prepare verified Maven required by frozen Gson plugins
+        if: matrix.source == 'google/gson'
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/maven.tar.gz https://archive.apache.org/dist/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.tar.gz
+          echo 'bcfe4fe305c962ace56ac7b5fc7a08b87d5abd8b7e89027ab251069faebee516b0ded8961445d6d91ec1985dfe30f8153268843c89aa392733d1a3ec956c9978  /tmp/maven.tar.gz' | sha512sum --check -
+          sudo mkdir -p /opt/oss25
+          sudo tar -xzf /tmp/maven.tar.gz -C /opt/oss25
+          sudo ln -s /opt/oss25/apache-maven-3.9.11 /opt/oss25/maven
+          /opt/oss25/maven/bin/mvn --version
+      - name: Prepare exact Python package manager
+        run: python -m pip install uv==0.12.5
+      - name: Install exact product dependencies and build unchanged source
+        working-directory: product
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = db16e1a8f6372cdd47c018a5ac537b88ad9cda69
+          corepack enable
+          corepack prepare pnpm@11.19.0 --activate
+          { pnpm install --frozen-lockfile && pnpm build && git diff --exit-code; } > product-build.log 2>&1 || { echo "Frozen product build failed; detailed logs will be encrypted."; exit 1; }
+      - name: Place trusted tooling outside the private runner home
+        run: |
+          sudo mkdir -p /opt/oss25
+          sudo mv product /opt/oss25/product
+          sudo cp -a harness/oss25-current /opt/oss25/harness
+          sudo mv /home/runner/.rustup /opt/oss25/rustup
+          sudo cp -a /home/runner/.cargo/bin /opt/oss25/cargo-bin
+          if [ -d "$RUNNER_TEMP/.setup-beam" ]; then
+            sudo cp -a "$RUNNER_TEMP/.setup-beam" /opt/oss25/beam
+            sudo /opt/oss25/beam/otp/Install -minimal /opt/oss25/beam/otp
+          fi
+          sudo chmod -R a+rX /opt/oss25
+          sudo -u autoapitest -H /usr/bin/env PATH="/opt/oss25/cargo-bin:$PATH" RUSTUP_HOME=/opt/oss25/rustup sh -c 'cd /home/autoapitest && node --version && python --version && go version && ruby --version && rustc --version && cargo --version && composer --version && mvn --version && uv --version && bun --version && deno --version && git config --global --add safe.directory /opt/oss25/product'
+      - name: Prepare declared pinned Rust toolchains
+        run: sudo /usr/bin/env PATH="$PATH" python3 /opt/oss25/harness/provision_rust.py "${{ matrix.source }}"
+      - name: Prepare exact frozen CI system prerequisites
+        run: sudo /usr/bin/env PATH="$PATH" DEBIAN_FRONTEND=noninteractive python3 /opt/oss25/harness/provision_ci_prerequisites.py "${{ matrix.source }}"
+      - name: Prepare exact upstream browser binaries and display
+        run: sudo /usr/bin/env PATH="$PATH" python3 /opt/oss25/harness/provision_browsers.py "${{ matrix.source }}"
+      - name: Prepare upstream tRPC database service
+        if: matrix.source == 'trpc/trpc'
+        run: |
+          set -euo pipefail
+          sudo docker pull postgres
+          sudo docker image inspect postgres --format '{{json .RepoDigests}}'
+          sudo docker run --detach --name oss25-postgres -e POSTGRES_USER=postgres -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=trpcdb -p 127.0.0.1:5432:5432 postgres
+          for attempt in $(seq 1 60); do
+            if sudo docker exec oss25-postgres pg_isready -U postgres -d trpcdb; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Run entire natural product flow in isolated repository identity
+        env:
+          TARGET_SOURCE: ${{ matrix.source }}
+          TARGET_CANDIDATE_LIMIT: ${{ inputs.candidate_limit }}
+          OSS25_OPERATOR_TOKEN: ${{ secrets.OSS25_OPERATOR_TOKEN }}
+          OSS25_MODEL_API_KEY: ${{ secrets.OSS25_MODEL_API_KEY }}
+        run: exec sudo --preserve-env=PATH,GITHUB_WORKSPACE,TARGET_SOURCE,TARGET_CANDIDATE_LIMIT,OSS25_OPERATOR_TOKEN,OSS25_MODEL_API_KEY /usr/bin/env PATH="$PATH" python3 /opt/oss25/harness/driver.py
+      - name: Copy bounded evidence for artifact collection
+        if: always()
+        run: |
+          if sudo test -d /home/autoapitest/evidence; then
+            sudo cp -a /home/autoapitest/evidence "$GITHUB_WORKSPACE/evidence"
+            sudo chown -R "$(id -u):$(id -g)" "$GITHUB_WORKSPACE/evidence"
+          fi
+      - name: Encrypt detailed evidence before any upload
+        if: always()
+        env:
+          OSS25_MODEL_API_KEY: ${{ secrets.OSS25_MODEL_API_KEY }}
+          TARGET_SOURCE: ${{ matrix.source }}
+        run: sudo --preserve-env=GITHUB_WORKSPACE,GITHUB_RUN_ID,TARGET_SOURCE,OSS25_MODEL_API_KEY python3 harness/oss25-current/encrypt_evidence.py
+      - name: Preserve bounded reports even when a repository fails
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: repo-${{ strategy.job-index }}
+          path: encrypted-evidence/*
+          if-no-files-found: warn
+          retention-days: 14
+
