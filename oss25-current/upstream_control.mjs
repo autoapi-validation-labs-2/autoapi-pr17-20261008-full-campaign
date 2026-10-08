@@ -14,6 +14,8 @@ const configs={
  'vuejs/core':{manifest:'package.json',ecosystem:'npm',name:'vue',commands:[cmd('corepack','pnpm','install','--no-frozen-lockfile','--config.strict-dep-builds=false'),cmd('pnpm','run','test-unit')]},
  'trpc/trpc':{manifest:'package.json',ecosystem:'npm',name:'@trpc/server',commands:[cmd('corepack','pnpm','install','--no-frozen-lockfile','--config.strict-dep-builds=false'),cmd('pnpm','test','--coverage')]},
  'gofiber/fiber':{manifest:'go.mod',ecosystem:'go',name:'github.com/gofiber/fiber/v3',commands:[cmd('go','mod','download'),cmd('go','test','./...','-race','-count=5','-shuffle=on')]},
+ 'sinatra/sinatra':{manifest:'Gemfile',ecosystem:'gem',name:'sinatra',commands:[cmd('bundle','install'),cmd('bundle','exec','rake')]},
+ 'google/gson':{manifest:'pom.xml',ecosystem:'maven',name:'com.google.code.gson:gson',commands:[cmd('mvn','clean','test','--projects','gson','--activate-profiles','gson-subset')]},
  'BurntSushi/ripgrep':{manifest:'Cargo.toml',ecosystem:'cargo',name:'ripgrep',commands:[cmd('cargo','test','--verbose','--workspace','--features','unstable-index'),cmd('cargo','test','--verbose','--workspace','--features','pcre2')]},
 };
 const config=configs[target];if(!config)throw new Error('No frozen upstream test producer selected for '+target);
@@ -24,6 +26,7 @@ try{
  if(target==='fastapi/fastapi')process.env.COVERAGE_FILE=path.join(source,'coverage','.coverage.linux-control');
  if(target==='vuejs/core')process.env.PUPPETEER_SKIP_DOWNLOAD='true';
  if(target==='trpc/trpc')process.env.MUTE_REACT_ACT_WARNINGS='1';
+ if(target==='sinatra/sinatra')for(const name of ['rack','rack_session','puma','tilt','zeitwerk'])process.env[name]='stable';
  const commands=config.commands;
  for(const command of commands){const result=await runRepositoryValidationCommand(source,'.',command,Math.max(1,deadlineAt-Date.now()),deadlineAt);record.commands.push(result);await save();if(result.exitCode!==0)break;}
  record.status=record.commands.length===commands.length&&record.commands.every(c=>c.exitCode===0)?'passed':'original_ci_producer_failed';
