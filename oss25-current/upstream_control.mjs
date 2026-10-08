@@ -14,6 +14,7 @@ const configs={
  'vuejs/core':{manifest:'package.json',ecosystem:'npm',name:'vue',commands:[cmd('corepack','pnpm','install','--no-frozen-lockfile','--config.strict-dep-builds=false'),cmd('pnpm','run','test-unit')]},
  'trpc/trpc':{manifest:'package.json',ecosystem:'npm',name:'@trpc/server',commands:[cmd('corepack','pnpm','install','--no-frozen-lockfile','--config.strict-dep-builds=false'),cmd('pnpm','test','--coverage')]},
  'gofiber/fiber':{manifest:'go.mod',ecosystem:'go',name:'github.com/gofiber/fiber/v3',commands:[cmd('go','mod','download'),cmd('go','test','./...','-race','-count=5','-shuffle=on')]},
+ 'puma/puma':{manifest:'Gemfile',ecosystem:'gem',name:'puma',commands:[cmd('bundle','install'),cmd('bundle','exec','rake','rubocop')]},
  'sinatra/sinatra':{manifest:'Gemfile',ecosystem:'gem',name:'sinatra',commands:[cmd('bundle','install'),cmd('bundle','exec','rake')]},
  'google/gson':{manifest:'pom.xml',ecosystem:'maven',name:'com.google.code.gson:gson',commands:[cmd('mvn','clean','test','--projects','gson','--activate-profiles','gson-subset')]},
  'BurntSushi/ripgrep':{manifest:'Cargo.toml',ecosystem:'cargo',name:'ripgrep',commands:[cmd('cargo','test','--verbose','--workspace','--features','unstable-index'),cmd('cargo','test','--verbose','--workspace','--features','pcre2')]},
@@ -24,6 +25,7 @@ const save=()=>fs.writeFile(path.join(out,'upstream-control.json'),JSON.stringif
 try{
  const prepared=await repositoryEnvironment({rootDir:source,manifestPath:config.manifest,ecosystem:config.ecosystem,packageName:config.name,deadlineAt});record.environment=prepared.log;adoptEnvironment(prepared.env);
  if(target==='fastapi/fastapi')process.env.COVERAGE_FILE=path.join(source,'coverage','.coverage.linux-control');
+ if(target==='puma/puma')delete process.env.PUMA_NO_RUBOCOP;
  if(target==='vuejs/core')process.env.PUPPETEER_SKIP_DOWNLOAD='true';
  if(target==='trpc/trpc')process.env.MUTE_REACT_ACT_WARNINGS='1';
  if(target==='sinatra/sinatra')for(const name of ['rack','rack_session','puma','tilt','zeitwerk'])process.env[name]='stable';
