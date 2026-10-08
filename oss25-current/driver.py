@@ -70,9 +70,29 @@ try:
  execute(['chown','-R','root:root',str(product)])
  execute(['chmod','-R','go-w',str(product)])
  for p in ['/home/autoapitest/tmp','/home/autoapitest/toolcache','/home/autoapitest/.runtime']:pathlib.Path(p).mkdir(exist_ok=True);execute(['chown','autoapitest:autoapitest',p])
+ # Ruby-builder binaries embed the official cache prefix. Mirror only Ruby
+ # through a symlink, retaining the private writable cache for other runtimes.
+ if item['source'] in ['puma/puma','sinatra/sinatra']:
+  cache=pathlib.Path('/opt/hostedtoolcache/Ruby');cache.mkdir(parents=True,exist_ok=True)
+  for version in ['3.1.7','3.2.0','2.7.8','3.0.7','3.4.7','4.0.6']:
+   prefix=cache/version
+   if not prefix.exists():prefix.mkdir();execute(['chown','autoapitest:autoapitest',str(prefix)])
+  usercache=pathlib.Path('/home/autoapitest/toolcache');usercache.mkdir(exist_ok=True);execute(['chown','autoapitest:autoapitest',str(usercache)])
+  (usercache/'Ruby').symlink_to(cache,target_is_directory=True)
+  report['ruby_cache_prefix']='official /opt/hostedtoolcache/Ruby via private cache symlink'
  for name,value in [('user.name','AutoAPI product testing'),('user.email','148944741+APPNINJAS123@users.noreply.github.com')]:execute(['git','-C',str(source),'config',name,value],env=safeenv)
  subprocess.run(['git','config','--global','--add','safe.directory',str(product)],env=safeenv,cwd='/home/autoapitest',user=user.pw_uid,group=user.pw_gid,extra_groups=[],check=True)
  subprocess.run(['git','submodule','update','--init','--recursive'],cwd=source,env=safeenv,user=user.pw_uid,group=user.pw_gid,extra_groups=[],check=True)
+ if item['source']=='nodejs/undici':
+  # Match frozen upstream CI host setup without executing source as root.
+  hostlines=subprocess.run(['python3','wpt','make-hosts-file'],cwd=source/'test/web-platform-tests/wpt',env=safeenv,user=user.pw_uid,group=user.pw_gid,extra_groups=[],capture_output=True,text=True,timeout=120,check=True).stdout
+  import ipaddress
+  for line in hostlines.splitlines():
+   fields=line.split('#',1)[0].split()
+   if not fields:continue
+   if not ipaddress.ip_address(fields[0]).is_loopback or not all(re.fullmatch(r'[A-Za-z0-9.-]+\.test',name) for name in fields[1:]):raise RuntimeError('Unexpected WPT host declaration')
+  with pathlib.Path('/etc/hosts').open('a') as hosts:hosts.write('\n'+hostlines+'\n')
+  report['upstream_wpt_loopback_hosts']='prepared and loopback-only validated'
  if item['source']=='elixir-plug/plug':
   probe=subprocess.run(['elixir','--version'],env=safeenv,cwd='/home/autoapitest',user=user.pw_uid,group=user.pw_gid,extra_groups=[],capture_output=True,text=True,check=True)
   if 'Elixir 1.18.4' not in probe.stdout:raise RuntimeError('Pinned Elixir is not active under repository identity: '+probe.stdout[-500:])
