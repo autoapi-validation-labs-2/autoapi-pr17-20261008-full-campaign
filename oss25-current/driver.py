@@ -34,6 +34,7 @@ if '--preflight' in sys.argv:
  record['finished_at']=now();(out/'infrastructure-preflight.json').write_text(redact(json.dumps(record,indent=2))+'\n')
  print(json.dumps(record));sys.exit(0 if record['status']=='passed' else 2)
 item=next(i for i in inventory if i['source']==os.environ['TARGET_SOURCE'])
+baseline_mode='--baseline' in sys.argv
 limit=os.environ.get('TARGET_CANDIDATE_LIMIT','all') or 'all'
 if limit not in ['all','3']:raise RuntimeError('Unapproved candidate limit')
 limit_arg='2147483647' if limit=='all' else '3'
@@ -83,21 +84,24 @@ try:
  report['publication_credential_helper']='passed under repository UID'
  report['runtime_php']=execute(['php','--version']).splitlines()[0]
  command=[node,'--import',str(product/'packages/part-a/node_modules/tsx/dist/loader.mjs'),str(product/'scripts/run-dovel-flow.mjs'),'--secrets-stdin','--repository',str(source),'--owner',item['test_repository'].split('/')[0],'--name',item['test_repository'].split('/')[1],'--max-candidates',limit_arg,'--max-runtime-minutes','60','--open-pr','true','--output-dir',str(out)]
+ if baseline_mode:
+  command=[node,'--import',str(product/'packages/part-a/node_modules/tsx/dist/loader.mjs'),str(ROOT/'baseline_controller.mjs'),str(product),str(source),str(out)]
+  report['command_path']='independent unchanged-source baseline control; no model requests or publication'
  report['node_heap_limit_mib']=10240
  report['host_memtotal_kib']=next(line.split(':',1)[1].strip() for line in pathlib.Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemTotal:'))
  mem_kib=int(report['host_memtotal_kib'].split()[0])
  if mem_kib < 14*1024*1024:raise RuntimeError('Host memory insufficient for10GiB heap; no product flow started')
  report.update(status='running',runtime_node=execute([node,'--version']),kernel_ptrace_scope=pathlib.Path('/proc/sys/kernel/yama/ptrace_scope').read_text().strip(),repository_uid=user.pw_uid,coordinator_uid=os.getuid())
  save()
- p=subprocess.Popen(command,cwd=product,env=safeenv,user=user.pw_uid,group=user.pw_gid,extra_groups=[],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,start_new_session=True)
- p.stdin.write(json.dumps({'OPENROUTER_API_KEY':modelkey,'GH_TOKEN':operator}));p.stdin.close()
+ p=subprocess.Popen(command,cwd=product,env=safeenv,user=user.pw_uid,group=user.pw_gid,extra_groups=[],stdin=subprocess.DEVNULL if baseline_mode else subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,start_new_session=True)
+ if not baseline_mode:p.stdin.write(json.dumps({'OPENROUTER_API_KEY':modelkey,'GH_TOKEN':operator}));p.stdin.close()
  with (out/'flow.log').open('w') as log:
   for line in p.stdout:
    line=redact(line);log.write(line);log.flush();
    if line.startswith(('[1/4]','[2/4]','[3/4]','[4/4]')):print('Product stage '+line.split(']')[0]+']',flush=True)
  code=p.wait()
- report.update(status='completed' if code==0 else 'flow_failed',exit_code=code)
+ report.update(status=('baseline_passed' if code==0 else 'baseline_failed') if baseline_mode else ('completed' if code==0 else 'flow_failed'),exit_code=code)
  report['source_unchanged']=not execute(['git','-C',str(source),'status','--porcelain','--untracked-files=no'],env=safeenv)
 except Exception as e:report.update(status='infrastructure_blocked',error=redact(str(e)))
 report['finished_at']=now();save();print(json.dumps({k:report.get(k) for k in ['source','product_sha','status','exit_code','source_unchanged']}))
-sys.exit(0 if report['status']=='completed' else 2)
+sys.exit(0 if report['status'] in ['completed','baseline_passed'] else 2)
