@@ -22,7 +22,7 @@ const configs={
  'fastify/fastify':{manifest:'package.json',ecosystem:'npm',name:'fastify',commands:[cmd('npm','install'),cmd('npm','run','unit')]},
  'vitejs/vite':{manifest:'package.json',ecosystem:'npm',name:'vite',commands:[cmd('corepack','pnpm','install','--no-frozen-lockfile','--config.strict-dep-builds=false'),cmd('pnpm','build'),cmd('pnpm','run','test-unit')]},
  'sinatra/sinatra':{manifest:'Gemfile',ecosystem:'gem',name:'sinatra',commands:[cmd('bundle','install'),cmd('bundle','exec','rake')]},
- 'google/gson':{manifest:'pom.xml',ecosystem:'maven',name:'com.google.code.gson:gson',commands:[cmd('mvn','clean','test','--projects','gson','--activate-profiles','gson-subset')]},
+ 'google/gson':{manifest:'pom.xml',ecosystem:'maven',name:'com.google.code.gson:gson',commands:[cmd('mvn','verify','javadoc:jar')]},
  'BurntSushi/ripgrep':{manifest:'Cargo.toml',ecosystem:'cargo',name:'ripgrep',commands:[cmd('cargo','test','--verbose','--workspace','--features','unstable-index'),cmd('cargo','test','--verbose','--workspace','--features','pcre2')]},
 };
 const config=configs[target];if(!config)throw new Error('No frozen upstream test producer selected for '+target);
