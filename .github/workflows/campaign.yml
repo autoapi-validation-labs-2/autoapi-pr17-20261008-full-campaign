@@ -275,7 +275,10 @@ jobs:
         if: always()
         run: |
           if sudo test -d /home/autoapitest/evidence; then
-            sudo cp -a /home/autoapitest/evidence "$GITHUB_WORKSPACE/evidence"
+            mkdir -p "$GITHUB_WORKSPACE/evidence"
+            while IFS= read -r -d '' item; do
+              sudo cp -a "$item" "$GITHUB_WORKSPACE/evidence/"
+            done < <(sudo find /home/autoapitest/evidence -mindepth 1 -maxdepth 1 \( ! -name 'candidate-*' -o -name 'candidate-receipts' \) -print0)
             sudo chown -R "$(id -u):$(id -g)" "$GITHUB_WORKSPACE/evidence"
           fi
       - name: Encrypt detailed evidence before any upload
