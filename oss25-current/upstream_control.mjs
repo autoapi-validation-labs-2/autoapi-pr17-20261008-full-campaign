@@ -31,7 +31,7 @@ const configs={
  'vuejs/core':{manifest:'package.json',ecosystem:'npm',name:'vue',commands:[cmd('corepack','pnpm','install','--frozen-lockfile'),cmd('pnpm','run','test-unit')]},
  'trpc/trpc':{manifest:'package.json',ecosystem:'npm',name:'@trpc/server',commands:[cmd('corepack','pnpm','install','--frozen-lockfile'),cmd('pnpm','test','--coverage')]},
  'gofiber/fiber':{manifest:'go.mod',ecosystem:'go',name:'github.com/gofiber/fiber/v3',commands:[cmd('go','mod','download'),cmd('go','test','./...','-race','-count=5','-shuffle=on')]},
- 'puma/puma':{manifest:'Gemfile',ecosystem:'gem',name:'puma',commands:[cmd('bundle','install'),cmd('bundle','exec','rake','rubocop')]},
+ 'puma/puma':{manifest:'Gemfile',ecosystem:'gem',name:'puma',commands:[cmd('bundle','install'),cmd('bundle','exec','rake','rubocop'),cmd('bundle','exec','rake','compile'),cmd('test/runner','--verbose')]},
  'guzzle/guzzle':{manifest:'composer.json',ecosystem:'composer',name:'guzzlehttp/guzzle',commands:[cmd('composer','update','--no-interaction','--no-progress','--prefer-stable','--prefer-lowest'),cmd('composer','update','--no-interaction','--no-progress'),cmd('./vendor/bin/phpunit')]},
  'fastify/fastify':{manifest:'package.json',ecosystem:'npm',name:'fastify',commands:[cmd('npm','install'),cmd('npm','run','unit')]},
  'vitejs/vite':{manifest:'package.json',ecosystem:'npm',name:'vite',commands:[cmd('corepack','pnpm','install','--frozen-lockfile'),cmd('pnpm','build'),cmd('pnpm','run','test-unit')]},
@@ -47,7 +47,7 @@ try{
  record.environment=['Independent Linux control uses the externally provisioned source-CI host profile; product CI inference is not used.'];
  if(target==='fastapi/fastapi')process.env.COVERAGE_FILE=path.join(source,'coverage','.coverage.linux-control');
  if(target==='fastify/fastify')delete process.env.NODE_ENV;
- if(target==='puma/puma')delete process.env.PUMA_NO_RUBOCOP;
+ if(target==='puma/puma'){delete process.env.PUMA_NO_RUBOCOP;process.env.PUMA_TEST_DEBUG='true';process.env.TESTOPTS='-v';}
  if(target==='vuejs/core')process.env.PUPPETEER_SKIP_DOWNLOAD='true';
  if(target==='trpc/trpc')process.env.MUTE_REACT_ACT_WARNINGS='1';
  if(target==='sinatra/sinatra')for(const name of ['rack','rack_session','puma','tilt','zeitwerk'])process.env[name]='stable';
