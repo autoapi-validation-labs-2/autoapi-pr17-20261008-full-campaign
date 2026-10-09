@@ -101,58 +101,180 @@
   ],
   "guzzle/guzzle": [
     {
-      "head_sha": "567c22c3e41dcbb72f6b975062b61e6c86e1ac34",
-      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/9",
-      "published_patch_sha256": "68954f9670a920f8a7a319f27cd532c7a24e61ffbd955b4a91bcbc6f8a1fbd17"
-    },
-    {
-      "head_sha": "455fa673ef9752acafe8f1c8ff2292a9287f9f60",
-      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/8",
-      "published_patch_sha256": "a087c705e3ac4db7388d6adbbe22e37b7de7854d55b1fac1cdcba696085ea513"
-    },
-    {
-      "head_sha": "12d88642467d94dc381e20de5fba1446789101cc",
-      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/7",
-      "published_patch_sha256": "2ea903f0cb864aa8da1edf9cd56cf69f3834a9ddab9ae9aa8e4589f136d1f028"
-    },
-    {
-      "head_sha": "d12710db2601c763420bb90891b7a9ed72471dca",
-      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/6",
-      "published_patch_sha256": "2a2518a63bc6c5a9b4f67a82ae5f45a2eb446c8846a9207a25e1f9ee9bebf2da"
-    },
-    {
       "head_sha": "c5284a2cee72183747a29b43085c8ec892b04f88",
       "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/5",
-      "published_patch_sha256": "3785ef88952431b01c09ee783d8d35002663411f6145195940250d498c2e54c3"
+      "published_patch_sha256": "3785ef88952431b01c09ee783d8d35002663411f6145195940250d498c2e54c3",
+      "scope_commands": [
+        {
+          "executable": "composer",
+          "args": [
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "composer",
+          "args": [
+            "bin",
+            "phpstan",
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "vendor/bin/phpstan",
+          "args": [
+            "analyze",
+            "--no-progress"
+          ]
+        }
+      ],
+      "scope": "Actual frozen Guzzle Linux static-tool CI for phpstan/phpstan-deprecation-rules"
     },
     {
       "head_sha": "275e551a9dfc79a976fcbec450111ca309385e69",
       "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/4",
-      "published_patch_sha256": "84257bccb8f5414e0e791ffea04a0bbbde697efc5b52b137b08f6f395464b1ff"
+      "published_patch_sha256": "84257bccb8f5414e0e791ffea04a0bbbde697efc5b52b137b08f6f395464b1ff",
+      "scope_commands": [
+        {
+          "executable": "composer",
+          "args": [
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "composer",
+          "args": [
+            "bin",
+            "phpstan",
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "vendor/bin/phpstan",
+          "args": [
+            "analyze",
+            "--no-progress"
+          ]
+        }
+      ],
+      "scope": "Actual frozen Guzzle Linux static-tool CI for phpstan/phpstan"
     },
     {
       "head_sha": "61ff43912701b60e22d018d374c4ce74c3b50819",
       "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/3",
-      "published_patch_sha256": "724cd2a58e37ecedec50b7fa998d40b0dab9cb023429187ff1aac48ab229e583"
+      "published_patch_sha256": "724cd2a58e37ecedec50b7fa998d40b0dab9cb023429187ff1aac48ab229e583",
+      "scope_commands": [
+        {
+          "executable": "composer",
+          "args": [
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "composer",
+          "args": [
+            "bin",
+            "php-cs-fixer",
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "vendor/bin/php-cs-fixer",
+          "args": [
+            "fix",
+            "--diff",
+            "--dry-run"
+          ]
+        }
+      ],
+      "scope": "Actual frozen Guzzle Linux static-tool CI for friendsofphp/php-cs-fixer"
     },
     {
       "head_sha": "dda6409c3bbc301e2cbe03110b0df45fe824d466",
       "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/2",
-      "published_patch_sha256": "49bc67e8a66c567d85d5d4665db26c0b51257a388c083ffce28589c95bc27f7f"
+      "published_patch_sha256": "49bc67e8a66c567d85d5d4665db26c0b51257a388c083ffce28589c95bc27f7f",
+      "scope_commands": [
+        {
+          "executable": "make",
+          "args": [
+            "static-composer-normalize-check"
+          ]
+        }
+      ],
+      "scope": "Actual frozen Guzzle Linux static-tool CI for ergebnis/composer-normalize"
     },
     {
       "head_sha": "2fb8036b7ffc0681922da57b28315cccded2c15f",
       "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/1",
-      "published_patch_sha256": "4f84c6d2339267c997b70e34b324f4fb18bcfe88237a87e8266d8a4bd92b1051"
+      "published_patch_sha256": "4f84c6d2339267c997b70e34b324f4fb18bcfe88237a87e8266d8a4bd92b1051",
+      "scope_commands": [
+        {
+          "executable": "composer",
+          "args": [
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "composer",
+          "args": [
+            "bin",
+            "phpstan",
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "vendor/bin/phpstan",
+          "args": [
+            "analyze",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "composer",
+          "args": [
+            "bin",
+            "php-cs-fixer",
+            "update",
+            "--no-interaction",
+            "--no-progress"
+          ]
+        },
+        {
+          "executable": "vendor/bin/php-cs-fixer",
+          "args": [
+            "fix",
+            "--diff",
+            "--dry-run"
+          ]
+        },
+        {
+          "executable": "make",
+          "args": [
+            "static-composer-normalize-check"
+          ]
+        }
+      ],
+      "scope": "Actual frozen Guzzle Linux static-tool CI for bamarni/composer-bin-plugin"
     }
   ],
   "google/gson": [
@@ -185,6 +307,104 @@
       "base_sha": "845664ba1c307e6c1910d07cfed2f622e0ad8df1",
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-google-gson/pull/1",
       "published_patch_sha256": "0e6425e017f57a8b0efb4bb0b0fd3ec7098cc27a89593d0ec0376064a64a2a6d"
+    }
+  ],
+  "sinatra/sinatra": [
+    {
+      "head_sha": "20e39c12ab8392bdda1ecedc701d41dcbc730d51",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/16",
+      "published_patch_sha256": "4ca01bef85340577b3b921663f26ac228f5c01e2d7f464f7edf9950f667b33c2"
+    },
+    {
+      "head_sha": "2942069be6e7e924831bd04bbd3e112b2816180a",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/15",
+      "published_patch_sha256": "65fb79c467c6500b11cec0156ea2ae88cfd6448689dc09214d1f421b89b93a35"
+    },
+    {
+      "head_sha": "4e253cb77fb87408d1e2489d7d3b834e538a7d56",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/14",
+      "published_patch_sha256": "a85921be75724dc0b3063acc41512f9df143edabb3f7a62d79e75df8e7d9846e"
+    },
+    {
+      "head_sha": "895f3175a2530b6ec8bbd31e4fa4ba98dd31c96f",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/13",
+      "published_patch_sha256": "3c1ca11ac86dd824d2246a8ae79d25b6db3bd8e9ea9f3805fefb88c53c485ca0"
+    },
+    {
+      "head_sha": "e22bf621e436c8f1f4d8214dabb2da3ddd18cab3",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/12",
+      "published_patch_sha256": "c34599b1962f02bffce86ab2d48166e7d9613d226dccb80313008d8d46aa817d"
+    },
+    {
+      "head_sha": "65ad8cd1674c05b18b3f1889712c814120a2e4e2",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/11",
+      "published_patch_sha256": "ffc66033ada92ca180ed4248c53531c79ac2c6415d711164f3ec0e2e92b5acaf"
+    },
+    {
+      "head_sha": "fc0672690e6fb47625cc2d8fb19948526b64edf1",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/10",
+      "published_patch_sha256": "25adc61a642eb9f3de0ccdecb508570f708bbf03dfc0781f9de526fb8a3f5f7b"
+    },
+    {
+      "head_sha": "769abcc246e765abbfcb744a814f680b70148895",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/9",
+      "published_patch_sha256": "7f6a4127d14715c88f36eb38815296b72d22e8cad241c3baec098e52d25adafc"
+    },
+    {
+      "head_sha": "2423520a7cadbf86ed39f5592e798afd59e719dc",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/8",
+      "published_patch_sha256": "ef8e30bba4c36d8d0e888aca9e8784dff3ef2cf7b59fb64ed9f3513fb5cff953"
+    },
+    {
+      "head_sha": "1523853c83c52b43bf4b72c0b3637a3e5d80255b",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/7",
+      "published_patch_sha256": "b0f44e6b05644a11654491a6be151d1c9cb8c7e4e4a81879c54c679579152f5c"
+    },
+    {
+      "head_sha": "dcf942ca79c3e4bc387bf9bb712dc8f847fcfd2b",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/6",
+      "published_patch_sha256": "36aa3316c4d30b9d834b0930b79cfe9470be9a35c1fd135275af14c5db070240"
+    },
+    {
+      "head_sha": "1c6e1fbb549ddfc523d31669b21e83c49054bae3",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/5",
+      "published_patch_sha256": "6ce6ef22688627bf267c258ba590d7f07deb0c8c7927a5a5c7a067d1e6eeb2b7"
+    },
+    {
+      "head_sha": "faa1da268e3b904ae22e8425f662607b6df3338f",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/4",
+      "published_patch_sha256": "ab965a23f3a2282837698c3dc00ccd1b4a758837b5f0bbad8b6b7eb641d3c312"
+    },
+    {
+      "head_sha": "357443e1e8199a507fd4101b7f2c26b8b8d75f3b",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/3",
+      "published_patch_sha256": "8118192b2da050c11e769189f0e68bdf47075ca1e8beed0b5c607400c2ab422d"
+    },
+    {
+      "head_sha": "6fb7ae674196d516e6192f33b46b9339a7a92c9a",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/2",
+      "published_patch_sha256": "3bfdf9918c1833afd62edc51303fe54aa653e7f66cdfb7f2ec72bce508eebf44"
+    },
+    {
+      "head_sha": "12e83b7e4fa592360e38a925fec86d766c668715",
+      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/1",
+      "published_patch_sha256": "82b0e16fa4766ec291d689dd70e901df11faf21f3e503d11be8cf09a2f41558b"
     }
   ]
 }
