@@ -23,7 +23,7 @@ const configs={
  'encode/httpx':{manifest:'pyproject.toml',ecosystem:'pypi',name:'httpx',commands:[cmd('sh','scripts/install'),cmd('sh','scripts/check'),cmd('sh','scripts/build'),cmd('sh','scripts/test'),cmd('sh','scripts/coverage')]},
  'gin-gonic/gin':{manifest:'go.mod',ecosystem:'go',name:'github.com/gin-gonic/gin',commands:[cmd('make','test')]},
  'labstack/echo':{manifest:'go.mod',ecosystem:'go',name:'github.com/labstack/echo/v5',commands:[cmd('go','test','-race','--coverprofile=coverage.coverprofile','--covermode=atomic','./...')]},
- 'sharkdp/bat':{manifest:'Cargo.toml',ecosystem:'cargo',name:'bat',commands:[cmd('cargo','test','--locked')]},
+ 'sharkdp/bat':{manifest:'Cargo.toml',ecosystem:'cargo',name:'bat',commands:[cmd('cargo','fmt','--','--check'),cmd('cargo','clippy','--locked','--all-targets','--all-features','--','-D','warnings'),cmd('cargo','test','--locked')]},
  'slimphp/Slim':{manifest:'composer.json',ecosystem:'composer',name:'slim/slim',commands:[cmd('composer','update','--prefer-dist','--no-progress','--no-interaction','--ansi'),cmd('vendor/bin/phpunit','--no-coverage')]},
  'elixir-plug/plug':{manifest:'mix.exs',ecosystem:'hex',name:'plug',commands:[cmd('mix','deps.get'),cmd('mix','test')]},
  'psf/requests':{manifest:'pyproject.toml',ecosystem:'pypi',name:'requests',commands:[cmd('make'),cmd('make','ci')]},
@@ -37,7 +37,7 @@ const configs={
  'vitejs/vite':{manifest:'package.json',ecosystem:'npm',name:'vite',commands:[cmd('corepack','pnpm','install','--frozen-lockfile'),cmd('pnpm','build'),cmd('pnpm','run','test-unit')]},
  'sinatra/sinatra':{manifest:'Gemfile',ecosystem:'gem',name:'sinatra',commands:[cmd('bundle','install'),cmd('bundle','exec','rake')]},
  'google/gson':{manifest:'pom.xml',ecosystem:'maven',name:'com.google.code.gson:gson',commands:[cmd('mvn','verify','javadoc:jar')]},
- 'BurntSushi/ripgrep':{manifest:'Cargo.toml',ecosystem:'cargo',name:'ripgrep',commands:[cmd('cargo','test','--verbose','--workspace','--features','unstable-index'),cmd('cargo','test','--verbose','--workspace','--features','pcre2')]},
+ 'BurntSushi/ripgrep':{manifest:'Cargo.toml',ecosystem:'cargo',name:'ripgrep',commands:[cmd('cargo','fmt','--all','--check'),cmd('cargo','test','--verbose','--workspace','--features','unstable-index'),cmd('cargo','test','--verbose','--workspace','--features','pcre2')]},
 };
 const config=configs[target];if(!config)throw new Error('No frozen upstream test producer selected for '+target);
 const record={status:'running',scope:'Actual frozen Linux CI runtime test producer for '+target+'; independent of product-inferred test-plan coverage',source_sha:execFileSync('git',['-C',source,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),commands:[],started_at:new Date().toISOString()};
