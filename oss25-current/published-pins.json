@@ -70,5 +70,33 @@
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-gofiber-fiber/pull/2",
       "published_patch_sha256": "8c2a719ee0e86e7340b732d81a7eafd97bb2a20e911c25ec7615b22456ec945d"
     }
+  ],
+  "slimphp/Slim": [
+    {
+      "head_sha": "1e932c6b283756490e674baee074d6cc8559301d",
+      "base_sha": "3675bf6baac66b07032575b7bef4200b60b7974b",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-slimphp-slim/pull/6",
+      "published_patch_sha256": "324a2101cec5b8f32ce1d95bd04197d11794575c1ed24b414ed49bbc737c4bad"
+    }
+  ],
+  "psf/requests": [
+    {
+      "head_sha": "79cd62a7d8cbc62855f09867f669f47fdfcfdb7a",
+      "base_sha": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-psf-requests/pull/3",
+      "published_patch_sha256": "88f4fe5aa2ce7928ed966113b12d42759ae8ecf55a27576c3750b692c741fb31"
+    },
+    {
+      "head_sha": "d5dc991289fdbf7f6fa32517dd641ecb2adf505f",
+      "base_sha": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-psf-requests/pull/2",
+      "published_patch_sha256": "9066a6d00127396d26d0e19b05eaabc23ac2ab610063825ef8fe2a4ca138b0d3"
+    },
+    {
+      "head_sha": "0bcb0734c706869ac63f39e67a6cb0a0e090937c",
+      "base_sha": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-psf-requests/pull/1",
+      "published_patch_sha256": "2f13342ce0d28b3594e93df9042ce7c5b53ff70138a457896fedc069c1ff743f"
+    }
   ]
 }
