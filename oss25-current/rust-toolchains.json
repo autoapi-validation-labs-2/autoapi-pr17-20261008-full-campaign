@@ -1,5 +1,12 @@
 {
   "nodejs/undici": [
     "nightly-2026-07-29"
+  ],
+  "BurntSushi/ripgrep": [
+    "1.96.0"
+  ],
+  "sharkdp/bat": [
+    "1.88.0",
+    "1.96.0"
   ]
 }
