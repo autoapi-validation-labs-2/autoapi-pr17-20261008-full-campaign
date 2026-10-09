@@ -1,5 +1,7 @@
 import json,os,pathlib,pwd,subprocess,sys
 versions=json.loads(pathlib.Path(__file__).with_name('browser-versions.json').read_text()).get(sys.argv[1],[])
+if sys.argv[1]=='eslint/eslint':
+ subprocess.run(['/usr/bin/apt-get','install','-y','xvfb','libgtk-3-0t64','libnss3','libgbm1','libasound2t64','libatk-bridge2.0-0t64'],check=True)
 if not versions:sys.exit(0)
 engines=['chromium'] if sys.argv[1]=='trpc/trpc' else ['chromium','firefox','webkit']
 u=pwd.getpwnam('autoapitest');env={'PATH':os.environ['PATH'],'HOME':u.pw_dir,'CI':'true','LANG':'C.UTF-8','PLAYWRIGHT_BROWSERS_PATH':u.pw_dir+'/.cache/ms-playwright','DISPLAY':':99','TMPDIR':u.pw_dir+'/tmp','XDG_CONFIG_HOME':u.pw_dir+'/.config','XDG_CACHE_HOME':u.pw_dir+'/.cache','XDG_DATA_HOME':u.pw_dir+'/.local/share','XDG_RUNTIME_DIR':u.pw_dir+'/.runtime'}
@@ -15,3 +17,9 @@ for v in versions:
  for browser in engines:
   subprocess.run(['npx','--yes','playwright@'+v,'screenshot','--browser',browser,'about:blank',u.pw_dir+'/browser-'+browser+'.png'],env=env,cwd=u.pw_dir,user=u.pw_uid,group=u.pw_gid,extra_groups=[],check=True)
 print(json.dumps({'source':sys.argv[1],'browser_versions_installed':versions,'required_engines_smoke_tested':engines}))
+
+# Preserve the upstream Playwright --with-deps setup step without arbitrary sudo.
+bridge=pathlib.Path('/opt/oss25/harness/playwright_deps.py');bridge.chmod(0o755)
+policy=pathlib.Path('/etc/sudoers.d/autoapi-playwright-deps');policy.write_text('autoapitest ALL=(root) NOPASSWD: /opt/oss25/harness/playwright_deps.py *\n');policy.chmod(0o440)
+subprocess.run(['visudo','-cf',str(policy)],check=True)
+wrapper=pathlib.Path('/usr/local/bin/sudo');wrapper.write_text('#!/bin/sh\nif [ "$#" -eq 4 ] && [ "$1" = -- ] && [ "$2" = sh ] && [ "$3" = -c ]; then\n exec /usr/bin/sudo -- /opt/oss25/harness/playwright_deps.py "$4"\nfi\nexec /usr/bin/sudo "$@"\n');wrapper.chmod(0o755)

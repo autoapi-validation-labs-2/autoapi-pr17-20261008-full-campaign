@@ -145,7 +145,7 @@ jobs:
           df -h /
           free -h
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends ruby-dev libyaml-dev libffi-dev libssl-dev composer php-curl php-xml php-mbstring php-zip php-sqlite3 elixir erlang-dev maven python3-venv
+          sudo apt-get install -y --no-install-recommends ruby-dev libyaml-dev libffi-dev libssl-dev composer php-curl php-xml php-mbstring php-zip php-sqlite3 elixir erlang-dev maven python3-venv libpcre2-dev
           sudo -u autoapitest sudo -n true && exit 1 || true
       - uses: shivammathur/setup-php@b604ade2a87db23f8871b7182e69ec5e75effb45
         if: matrix.source == 'slimphp/Slim' || matrix.source == 'guzzle/guzzle'
@@ -166,6 +166,11 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
+      - uses: actions/setup-java@v4
+        if: matrix.source == 'google/gson'
+        with:
+          distribution: temurin
+          java-version: '17'
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.source == 'psf/requests' && '3.10' || '3.11' }}

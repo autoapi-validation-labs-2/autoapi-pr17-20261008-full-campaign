@@ -13,14 +13,28 @@ const deadlineAt=Date.now()+60*60_000;
 const target=process.env.TARGET_SOURCE;
 const cmd=(executable,...args)=>({executable,args});
 const configs={
+ 'axios/axios':{manifest:'package.json',ecosystem:'npm',name:'axios',commands:[cmd('npm','ci','--ignore-scripts'),cmd('npm','run','lint'),cmd('npm','run','build'),cmd('npm','run','test:vitest:unit'),cmd('npm','run','test:vitest:browser:headless')]},
+ 'expressjs/express':{manifest:'package.json',ecosystem:'npm',name:'express',commands:[cmd('npm','install'),cmd('npm','run','test-ci')]},
+ 'eslint/eslint':{manifest:'package.json',ecosystem:'npm',name:'eslint',commands:[cmd('npm','install'),cmd('node','Makefile','mocha'),cmd('node','Makefile','fuzz'),cmd('npm','run','test:emfile')]},
+ 'nodejs/undici':{manifest:'package.json',ecosystem:'npm',name:'undici',commands:[cmd('npm','ci'),cmd('npm','run','generate-pem'),...['test:unit','test:node-test','test:fetch','test:node-fetch','test:cache','test:cache-interceptor','test:cache-tests','test:cookies','test:interceptors','test:eventsource','test:infra','test:subresource-integrity','test:websocket','test:jest','test:wpt'].map(x=>cmd('npm','run',x))]},
+ 'sveltejs/svelte':{manifest:'package.json',ecosystem:'npm',name:'svelte',commands:[cmd('corepack','pnpm','install','--frozen-lockfile'),cmd('corepack','pnpm','test')]},
+ 'elysiajs/elysia':{manifest:'package.json',ecosystem:'npm',name:'elysia',commands:[cmd('bun','install'),cmd('bun','run','build'),cmd('bun','run','test'),cmd('bun','run','test:cf')]},
+ 'pallets/flask':{manifest:'pyproject.toml',ecosystem:'pypi',name:'flask',commands:[cmd('uv','run','--locked','--no-default-groups','--group','dev','tox','run')]},
+ 'encode/httpx':{manifest:'pyproject.toml',ecosystem:'pypi',name:'httpx',commands:[cmd('sh','scripts/install'),cmd('sh','scripts/check'),cmd('sh','scripts/build'),cmd('sh','scripts/test'),cmd('sh','scripts/coverage')]},
+ 'gin-gonic/gin':{manifest:'go.mod',ecosystem:'go',name:'github.com/gin-gonic/gin',commands:[cmd('make','test')]},
+ 'labstack/echo':{manifest:'go.mod',ecosystem:'go',name:'github.com/labstack/echo/v5',commands:[cmd('go','test','-race','--coverprofile=coverage.coverprofile','--covermode=atomic','./...')]},
+ 'sharkdp/bat':{manifest:'Cargo.toml',ecosystem:'cargo',name:'bat',commands:[cmd('cargo','test','--locked')]},
+ 'slimphp/Slim':{manifest:'composer.json',ecosystem:'composer',name:'slim/slim',commands:[cmd('composer','update','--prefer-dist','--no-progress','--no-interaction','--ansi'),cmd('vendor/bin/phpunit','--no-coverage')]},
+ 'elixir-plug/plug':{manifest:'mix.exs',ecosystem:'hex',name:'plug',commands:[cmd('mix','deps.get'),cmd('mix','test')]},
+ 'psf/requests':{manifest:'pyproject.toml',ecosystem:'pypi',name:'requests',commands:[cmd('make'),cmd('make','ci')]},
  'fastapi/fastapi':{manifest:'pyproject.toml',ecosystem:'pypi',name:'fastapi',commands:[cmd('uv','sync','--no-dev','--group','tests','--extra','all'),cmd('mkdir','-p','coverage'),cmd('uv','run','--no-sync','bash','scripts/test-cov.sh')]},
- 'vuejs/core':{manifest:'package.json',ecosystem:'npm',name:'vue',commands:[cmd('corepack','pnpm','install','--no-frozen-lockfile','--config.strict-dep-builds=false'),cmd('pnpm','run','test-unit')]},
- 'trpc/trpc':{manifest:'package.json',ecosystem:'npm',name:'@trpc/server',commands:[cmd('corepack','pnpm','install','--no-frozen-lockfile','--config.strict-dep-builds=false'),cmd('pnpm','test','--coverage')]},
+ 'vuejs/core':{manifest:'package.json',ecosystem:'npm',name:'vue',commands:[cmd('corepack','pnpm','install','--frozen-lockfile'),cmd('pnpm','run','test-unit')]},
+ 'trpc/trpc':{manifest:'package.json',ecosystem:'npm',name:'@trpc/server',commands:[cmd('corepack','pnpm','install','--frozen-lockfile'),cmd('pnpm','test','--coverage')]},
  'gofiber/fiber':{manifest:'go.mod',ecosystem:'go',name:'github.com/gofiber/fiber/v3',commands:[cmd('go','mod','download'),cmd('go','test','./...','-race','-count=5','-shuffle=on')]},
  'puma/puma':{manifest:'Gemfile',ecosystem:'gem',name:'puma',commands:[cmd('bundle','install'),cmd('bundle','exec','rake','rubocop')]},
  'guzzle/guzzle':{manifest:'composer.json',ecosystem:'composer',name:'guzzlehttp/guzzle',commands:[cmd('composer','update','--no-interaction','--no-progress','--prefer-stable','--prefer-lowest'),cmd('composer','update','--no-interaction','--no-progress'),cmd('./vendor/bin/phpunit')]},
  'fastify/fastify':{manifest:'package.json',ecosystem:'npm',name:'fastify',commands:[cmd('npm','install'),cmd('npm','run','unit')]},
- 'vitejs/vite':{manifest:'package.json',ecosystem:'npm',name:'vite',commands:[cmd('corepack','pnpm','install','--no-frozen-lockfile','--config.strict-dep-builds=false'),cmd('pnpm','build'),cmd('pnpm','run','test-unit')]},
+ 'vitejs/vite':{manifest:'package.json',ecosystem:'npm',name:'vite',commands:[cmd('corepack','pnpm','install','--frozen-lockfile'),cmd('pnpm','build'),cmd('pnpm','run','test-unit')]},
  'sinatra/sinatra':{manifest:'Gemfile',ecosystem:'gem',name:'sinatra',commands:[cmd('bundle','install'),cmd('bundle','exec','rake')]},
  'google/gson':{manifest:'pom.xml',ecosystem:'maven',name:'com.google.code.gson:gson',commands:[cmd('mvn','verify','javadoc:jar')]},
  'BurntSushi/ripgrep':{manifest:'Cargo.toml',ecosystem:'cargo',name:'ripgrep',commands:[cmd('cargo','test','--verbose','--workspace','--features','unstable-index'),cmd('cargo','test','--verbose','--workspace','--features','pcre2')]},
@@ -30,13 +44,16 @@ const record={status:'running',scope:'Actual frozen Linux CI runtime test produc
 const save=()=>fs.writeFile(path.join(out,'upstream-control.json'),JSON.stringify(record,null,2)+'\n');
 let service,serviceLog;
 try{
- const prepared=await repositoryEnvironment({rootDir:source,manifestPath:config.manifest,ecosystem:config.ecosystem,packageName:config.name,deadlineAt});record.environment=prepared.log;adoptEnvironment(prepared.env);
+ record.environment=['Independent Linux control uses the externally provisioned source-CI host profile; product CI inference is not used.'];
  if(target==='fastapi/fastapi')process.env.COVERAGE_FILE=path.join(source,'coverage','.coverage.linux-control');
  if(target==='fastify/fastify')delete process.env.NODE_ENV;
  if(target==='puma/puma')delete process.env.PUMA_NO_RUBOCOP;
  if(target==='vuejs/core')process.env.PUPPETEER_SKIP_DOWNLOAD='true';
  if(target==='trpc/trpc')process.env.MUTE_REACT_ACT_WARNINGS='1';
  if(target==='sinatra/sinatra')for(const name of ['rack','rack_session','puma','tilt','zeitwerk'])process.env[name]='stable';
+ if(target==='pallets/flask')process.env.TOX_ENV='py3.11';
+ if(target==='gin-gonic/gin')process.env.TESTTAGS='';
+ if(target==='elixir-plug/plug')process.env.MIX_ENV='test';
  const commands=config.commands;
  for(const command of commands){
   if(target==='guzzle/guzzle'&&command.executable==='./vendor/bin/phpunit'){
