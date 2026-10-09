@@ -406,5 +406,187 @@
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/1",
       "published_patch_sha256": "82b0e16fa4766ec291d689dd70e901df11faf21f3e503d11be8cf09a2f41558b"
     }
+  ],
+  "fastify/fastify": [
+    {
+      "head_sha": "e1d1b35b866ed8883eaa9f082c07518616ba3ccd",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/17",
+      "published_patch_sha256": "a852b270c93fe4e839157120dd9823f2006e19eabb501ae752102fc11c18253f"
+    },
+    {
+      "head_sha": "58dd656d689c777e5437d56e01793fe7edfd2ea5",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/16",
+      "published_patch_sha256": "cc03659c13ae07a857535ffceef3f43c80be4d4df2f3065908359311b40e382c",
+      "scope_commands": [
+        {
+          "executable": "npm",
+          "args": [
+            "install",
+            "--ignore-scripts"
+          ]
+        },
+        {
+          "executable": "npm",
+          "args": [
+            "install",
+            "--ignore-scripts"
+          ],
+          "cwd": "test/bundler/webpack"
+        },
+        {
+          "executable": "npm",
+          "args": [
+            "run",
+            "test"
+          ],
+          "cwd": "test/bundler/webpack"
+        }
+      ],
+      "scope": "Frozen Linux bundler CI producer; root install before the nested bundler package"
+    },
+    {
+      "head_sha": "bbbbc1d75b1be1ecf4c35c64eba9e77b20842939",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/15",
+      "published_patch_sha256": "ddf1c95e97c7aa6b28c5b236b831b0b2c86d7fbce892f44eee0ef682dbcc3478",
+      "scope_commands": [
+        {
+          "executable": "npm",
+          "args": [
+            "install",
+            "--ignore-scripts"
+          ]
+        },
+        {
+          "executable": "npm",
+          "args": [
+            "install",
+            "--ignore-scripts"
+          ],
+          "cwd": "test/bundler/webpack"
+        },
+        {
+          "executable": "npm",
+          "args": [
+            "run",
+            "test"
+          ],
+          "cwd": "test/bundler/webpack"
+        }
+      ],
+      "scope": "Frozen Linux bundler CI producer; root install before the nested bundler package"
+    },
+    {
+      "head_sha": "0b31fe304b14b45cc1790983d9a7c27a329eb738",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/14",
+      "published_patch_sha256": "26e7d7bd4920015dee102834e2e151d2e4024531a0088e0fbeb09d57166838a5"
+    },
+    {
+      "head_sha": "0094e709ac8132f5f487a5eab26a63784830d291",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/13",
+      "published_patch_sha256": "f5f7d707d463313217c2b49d63f8f2573f66eaa08c80c97a49b3c93fdee53c10"
+    },
+    {
+      "head_sha": "9716158d5dcf5880679fa5634eb629f45d58f2a6",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/12",
+      "published_patch_sha256": "4e39a761c8fc757902752ee9fbf37450b721b49e76ea752cda4135b2168f2207"
+    },
+    {
+      "head_sha": "0c10d0b259769f2171cd9bc87f23481a46fbf8e3",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/11",
+      "published_patch_sha256": "27e149620ca475ca0ec1762acb70e7e23cd3f01040ddd26e5b613e62121e5add"
+    },
+    {
+      "head_sha": "dd85275fdb24a91b79c0cf8ef8e942c9d0a3f23b",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/10",
+      "published_patch_sha256": "dafffdbb0c526c66c0a940332f873dbac6b746c8382efe6e0173ebede2a6e25e"
+    },
+    {
+      "head_sha": "67eb10adc57b3661b3a7a0164c71adb6a5bf6d60",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/9",
+      "published_patch_sha256": "10a7242928c40983ab98a6e724af5f29f7c621fb0b422d5d7ffb529e3614561b"
+    },
+    {
+      "head_sha": "1d2ffd805028cebd340f21dd95e9c6d9c9853463",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/8",
+      "published_patch_sha256": "3da7786742fe305f150c61829bcb50022ac7e613ff192ee1a5212270a3230587"
+    },
+    {
+      "head_sha": "ef9b8c1ec4fe5c5c181a51375aa5c57219010bd4",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/7",
+      "published_patch_sha256": "5dd0d979555ad12785d61cdb064ee2d24650129b8a0e1dca85f25ed5bd52b68a"
+    },
+    {
+      "head_sha": "96a766c0ff52f5aff648d766e4c18b92e1cdd489",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/6",
+      "published_patch_sha256": "32e90a020f62b6c94b0025c6c5ea88b525a14b99fc43d073fe49b7b264df2bab",
+      "scope_commands": [
+        {
+          "executable": "npm",
+          "args": [
+            "install",
+            "--ignore-scripts"
+          ]
+        },
+        {
+          "executable": "npm",
+          "args": [
+            "install",
+            "--ignore-scripts"
+          ],
+          "cwd": "test/bundler/esbuild"
+        },
+        {
+          "executable": "npm",
+          "args": [
+            "run",
+            "test"
+          ],
+          "cwd": "test/bundler/esbuild"
+        }
+      ],
+      "scope": "Frozen Linux bundler CI producer; root install before the nested bundler package"
+    },
+    {
+      "head_sha": "057d3609d762c5665b7b658b90e9597f8af9a044",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/5",
+      "published_patch_sha256": "b591125be1bc603d6ec916050feb607ce9b7a354785e9b2ae452fc53b5cf9b3f"
+    },
+    {
+      "head_sha": "fa6479f1659dcb3d584cbc113e3c3bcce2b27edc",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/4",
+      "published_patch_sha256": "082328ee148ee7be887ccd5a8cb970b33c5154ef4e176926f1d94b0d1d3e0add"
+    },
+    {
+      "head_sha": "1e29b6e598ab458dabc0f73b7e45fef78a94c763",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/3",
+      "published_patch_sha256": "7b71e22df14f5bb7eac65c7e958058daa4f95e52ce9ff7bf09586bbec15d0a4a"
+    },
+    {
+      "head_sha": "2fb606b4c61881ed3af03fb5058fd658696daf8f",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/2",
+      "published_patch_sha256": "c08842dcf40cc8112a8929a44a0d0b55d1e930e7ab4b801f394f1549975458dc"
+    },
+    {
+      "head_sha": "26a5f0e02dbc73eb0dcc69fac831a29d0b750f36",
+      "base_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastify-fastify/pull/1",
+      "published_patch_sha256": "f51efe483699f424b2c9ae70b39b62be5c90107d20c5c3b9337162a1b2601489"
+    }
   ]
 }

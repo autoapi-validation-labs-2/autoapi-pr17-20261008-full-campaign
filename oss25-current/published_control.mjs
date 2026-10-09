@@ -7,7 +7,7 @@ const [product, source, out] = process.argv.slice(2);
 const {runRepositoryValidationCommand} = await import(pathToFileURL(path.join(product,'packages/part-a/src/replay/dependencyVersionBumpExecutor.ts')));
 const input=JSON.parse(process.env.PUBLISHED_PIN_JSON),pins=Array.isArray(input)?input:[input];
 const target=process.env.TARGET_SOURCE;
-if(!['elixir-plug/plug','pallets/flask','fastapi/fastapi','gofiber/fiber','slimphp/Slim','psf/requests','guzzle/guzzle','google/gson','sinatra/sinatra'].includes(target))throw new Error('No independently qualified scoped producer');
+if(!['elixir-plug/plug','pallets/flask','fastapi/fastapi','gofiber/fiber','slimphp/Slim','psf/requests','guzzle/guzzle','google/gson','sinatra/sinatra','fastify/fastify'].includes(target))throw new Error('No independently qualified scoped producer');
 const git=(...args)=>execFileSync('git',['-C',source,...args],{encoding:'utf8',maxBuffer:32*1024*1024});
 const record={scope:'Independent additional validation of exact published changes; supplements and does not alter product receipts',source:target,started_at:new Date().toISOString(),updates:[],status:'running'};
 const save=()=>fs.writeFile(path.join(out,'published-control.json'),JSON.stringify(record,null,2)+'\n');
@@ -30,11 +30,11 @@ for(const pin of pins){
  const update={...pin,phases:[]};record.updates.push(update);
  const dir=path.join(out,pin.head_sha);await fs.mkdir(dir,{recursive:true});await fs.writeFile(path.join(dir,'independent-published.patch'),patch);await save();
  if(pin.scope_commands){
-  process.env.COMPOSER_ROOT_VERSION='8.2.x-dev';
+  if(target==='guzzle/guzzle')process.env.COMPOSER_ROOT_VERSION='8.2.x-dev';
   for(const [name,sha] of [['unchanged_tool_baseline',pin.base_sha],['exact_published_tool_update',pin.head_sha]]){
    clean(sha);const phase={name,head_sha:git('rev-parse','HEAD').trim(),commands:[]};update.phases.push(phase);await save();
    for(const command of pin.scope_commands){
-    const deadline=Date.now()+20*60_000;const r=await runRepositoryValidationCommand(source,'.',command,20*60_000,deadline);phase.commands.push(r);await save();if(r.exitCode!==0)break;
+    const deadline=Date.now()+20*60_000;const r=await runRepositoryValidationCommand(source,command.cwd??'.',command,20*60_000,deadline);phase.commands.push(r);await save();if(r.exitCode!==0)break;
    }
    phase.status=phase.commands.length===pin.scope_commands.length&&phase.commands.every(c=>c.exitCode===0)?'passed':'failed';await save();
   }
@@ -45,7 +45,7 @@ for(const pin of pins){
    clean(sha);const phase={name,head_sha:git('rev-parse','HEAD').trim(),commands:[]};update.phases.push(phase);await save();
    for(const command of [{executable:'mix',args:['deps.get']},{executable:'mix',args:['docs']}]){
     const deadline=Date.now()+20*60_000;
-    const r=await runRepositoryValidationCommand(source,'.',command,20*60_000,deadline);phase.commands.push(r);await save();if(r.exitCode!==0)break;
+    const r=await runRepositoryValidationCommand(source,command.cwd??'.',command,20*60_000,deadline);phase.commands.push(r);await save();if(r.exitCode!==0)break;
    }
    phase.status=phase.commands.length===2&&phase.commands.every(c=>c.exitCode===0)?'passed':'failed';await save();
   }
