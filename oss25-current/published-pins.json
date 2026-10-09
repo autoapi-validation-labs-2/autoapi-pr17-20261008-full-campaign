@@ -73,10 +73,36 @@
   ],
   "slimphp/Slim": [
     {
-      "head_sha": "1e932c6b283756490e674baee074d6cc8559301d",
+      "head_sha": "9b0439ef763d0e7e67241028fa248541d89891a4",
       "base_sha": "3675bf6baac66b07032575b7bef4200b60b7974b",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-slimphp-slim/pull/6",
-      "published_patch_sha256": "324a2101cec5b8f32ce1d95bd04197d11794575c1ed24b414ed49bbc737c4bad"
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-slimphp-slim/pull/8",
+      "published_patch_sha256": "a9ebba2acf192a906e85602757252ba93e07ce5f88486f9a2ba9b6fa4cff83af",
+      "scope": "Paired unchanged source and exact published update using frozen native Linux CI",
+      "scope_commands": [
+        {
+          "executable": "composer",
+          "args": [
+            "update",
+            "--prefer-dist",
+            "--no-progress",
+            "--no-interaction"
+          ]
+        },
+        {
+          "executable": "vendor/bin/phpcs",
+          "args": []
+        },
+        {
+          "executable": "vendor/bin/phpstan",
+          "args": []
+        },
+        {
+          "executable": "vendor/bin/phpunit",
+          "args": [
+            "--no-coverage"
+          ]
+        }
+      ]
     }
   ],
   "psf/requests": [
@@ -311,100 +337,26 @@
   ],
   "sinatra/sinatra": [
     {
-      "head_sha": "20e39c12ab8392bdda1ecedc701d41dcbc730d51",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/16",
-      "published_patch_sha256": "4ca01bef85340577b3b921663f26ac228f5c01e2d7f464f7edf9950f667b33c2"
-    },
-    {
-      "head_sha": "2942069be6e7e924831bd04bbd3e112b2816180a",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/15",
-      "published_patch_sha256": "65fb79c467c6500b11cec0156ea2ae88cfd6448689dc09214d1f421b89b93a35"
-    },
-    {
-      "head_sha": "4e253cb77fb87408d1e2489d7d3b834e538a7d56",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/14",
-      "published_patch_sha256": "a85921be75724dc0b3063acc41512f9df143edabb3f7a62d79e75df8e7d9846e"
-    },
-    {
-      "head_sha": "895f3175a2530b6ec8bbd31e4fa4ba98dd31c96f",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/13",
-      "published_patch_sha256": "3c1ca11ac86dd824d2246a8ae79d25b6db3bd8e9ea9f3805fefb88c53c485ca0"
-    },
-    {
-      "head_sha": "e22bf621e436c8f1f4d8214dabb2da3ddd18cab3",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/12",
-      "published_patch_sha256": "c34599b1962f02bffce86ab2d48166e7d9613d226dccb80313008d8d46aa817d"
-    },
-    {
-      "head_sha": "65ad8cd1674c05b18b3f1889712c814120a2e4e2",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/11",
-      "published_patch_sha256": "ffc66033ada92ca180ed4248c53531c79ac2c6415d711164f3ec0e2e92b5acaf"
-    },
-    {
-      "head_sha": "fc0672690e6fb47625cc2d8fb19948526b64edf1",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/10",
-      "published_patch_sha256": "25adc61a642eb9f3de0ccdecb508570f708bbf03dfc0781f9de526fb8a3f5f7b"
-    },
-    {
-      "head_sha": "769abcc246e765abbfcb744a814f680b70148895",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/9",
-      "published_patch_sha256": "7f6a4127d14715c88f36eb38815296b72d22e8cad241c3baec098e52d25adafc"
-    },
-    {
-      "head_sha": "2423520a7cadbf86ed39f5592e798afd59e719dc",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/8",
-      "published_patch_sha256": "ef8e30bba4c36d8d0e888aca9e8784dff3ef2cf7b59fb64ed9f3513fb5cff953"
-    },
-    {
-      "head_sha": "1523853c83c52b43bf4b72c0b3637a3e5d80255b",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/7",
-      "published_patch_sha256": "b0f44e6b05644a11654491a6be151d1c9cb8c7e4e4a81879c54c679579152f5c"
-    },
-    {
       "head_sha": "dcf942ca79c3e4bc387bf9bb712dc8f847fcfd2b",
       "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/6",
-      "published_patch_sha256": "36aa3316c4d30b9d834b0930b79cfe9470be9a35c1fd135275af14c5db070240"
-    },
-    {
-      "head_sha": "1c6e1fbb549ddfc523d31669b21e83c49054bae3",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/5",
-      "published_patch_sha256": "6ce6ef22688627bf267c258ba590d7f07deb0c8c7927a5a5c7a067d1e6eeb2b7"
-    },
-    {
-      "head_sha": "faa1da268e3b904ae22e8425f662607b6df3338f",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/4",
-      "published_patch_sha256": "ab965a23f3a2282837698c3dc00ccd1b4a758837b5f0bbad8b6b7eb641d3c312"
-    },
-    {
-      "head_sha": "357443e1e8199a507fd4101b7f2c26b8b8d75f3b",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/3",
-      "published_patch_sha256": "8118192b2da050c11e769189f0e68bdf47075ca1e8beed0b5c607400c2ab422d"
-    },
-    {
-      "head_sha": "6fb7ae674196d516e6192f33b46b9339a7a92c9a",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/2",
-      "published_patch_sha256": "3bfdf9918c1833afd62edc51303fe54aa653e7f66cdfb7f2ec72bce508eebf44"
-    },
-    {
-      "head_sha": "12e83b7e4fa592360e38a925fec86d766c668715",
-      "base_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
-      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra/pull/1",
-      "published_patch_sha256": "82b0e16fa4766ec291d689dd70e901df11faf21f3e503d11be8cf09a2f41558b"
+      "published_patch_sha256": "36aa3316c4d30b9d834b0930b79cfe9470be9a35c1fd135275af14c5db070240",
+      "scope": "Paired unchanged source and exact published update using frozen native Linux CI",
+      "scope_commands": [
+        {
+          "executable": "bundle",
+          "args": [
+            "install"
+          ]
+        },
+        {
+          "executable": "bundle",
+          "args": [
+            "exec",
+            "rake"
+          ]
+        }
+      ]
     }
   ],
   "fastify/fastify": [

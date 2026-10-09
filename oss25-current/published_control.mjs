@@ -31,6 +31,7 @@ for(const pin of pins){
  const dir=path.join(out,pin.head_sha);await fs.mkdir(dir,{recursive:true});await fs.writeFile(path.join(dir,'independent-published.patch'),patch);await save();
  if(pin.scope_commands){
   if(target==='guzzle/guzzle')process.env.COMPOSER_ROOT_VERSION='8.2.x-dev';
+  if(target==='sinatra/sinatra')for(const name of ['rack','rack_session','puma','tilt','zeitwerk'])process.env[name]='stable';
   for(const [name,sha] of [['unchanged_tool_baseline',pin.base_sha],['exact_published_tool_update',pin.head_sha]]){
    clean(sha);const phase={name,head_sha:git('rev-parse','HEAD').trim(),commands:[]};update.phases.push(phase);await save();
    for(const command of pin.scope_commands){
