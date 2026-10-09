@@ -77,7 +77,19 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '24.21.0'
+          node-version: '22.22.0'
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.26.5'
+          cache: false
+      - name: Prepare exact product OpenAPI detector
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 -o /tmp/oasdiff.tar.gz https://github.com/oasdiff/oasdiff/releases/download/v1.29.1/oasdiff_1.29.1_linux_amd64.tar.gz
+          echo '541f7c66c933495fceef24eaf5c48aa66c19069f366f7bd0a60a6a4820c5e533  /tmp/oasdiff.tar.gz' | sha256sum --check -
+          tar -xzf /tmp/oasdiff.tar.gz -C /tmp oasdiff
+          sudo install -m 0755 /tmp/oasdiff /usr/local/bin/oasdiff
+          oasdiff --version
       - name: Test unchanged product on Linux
         run: |
           set -euo pipefail
@@ -89,7 +101,8 @@ jobs:
           pnpm install --frozen-lockfile > ../evidence/component-install.log 2>&1
           code=0
           pnpm typecheck > ../evidence/component-typecheck.log 2>&1 || code=1
-          pnpm test > ../evidence/component-tests.log 2>&1 || code=1
+          pnpm -r --no-bail --workspace-concurrency=1 --if-present test > ../evidence/component-tests.log 2>&1 || code=1
+          pnpm test:scripts > ../evidence/component-scripts.log 2>&1 || code=1
           git diff --exit-code > ../evidence/component-source-integrity.log 2>&1 || code=1
           echo "$code" > ../evidence/component-exit.txt
           exit "$code"
@@ -189,6 +202,14 @@ jobs:
           sudo tar -xzf /tmp/maven.tar.gz -C /opt/oss25
           sudo ln -s /opt/oss25/apache-maven-3.9.11 /opt/oss25/maven
           /opt/oss25/maven/bin/mvn --version
+      - name: Prepare exact product OpenAPI detector
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 -o /tmp/oasdiff.tar.gz https://github.com/oasdiff/oasdiff/releases/download/v1.29.1/oasdiff_1.29.1_linux_amd64.tar.gz
+          echo '541f7c66c933495fceef24eaf5c48aa66c19069f366f7bd0a60a6a4820c5e533  /tmp/oasdiff.tar.gz' | sha256sum --check -
+          tar -xzf /tmp/oasdiff.tar.gz -C /tmp oasdiff
+          sudo install -m 0755 /tmp/oasdiff /usr/local/bin/oasdiff
+          oasdiff --version
       - name: Prepare exact Python package manager
         run: python -m pip install uv==0.12.5
       - name: Install exact product dependencies and build unchanged source
