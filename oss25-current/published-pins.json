@@ -4,5 +4,71 @@
     "base_sha": "73404f851852a00ffb2014be95d4598900fa77b8",
     "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-elixir-plug-plug/pull/1",
     "published_patch_sha256": "690b8ea67511054e05205cb0cac7f4a08523a4004ced990b95b2b4225a9d0119"
-  }
+  },
+  "pallets/flask": [
+    {
+      "head_sha": "5b8b99d2be274b8644dd95596febc8db89fd456a",
+      "base_sha": "d086db856be187255b8ec61ef409357393020f32",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-pallets-flask/pull/3",
+      "published_patch_sha256": "ed7b6d1c86aa3bf0dab32d36d3e5b88c54659c002c4033ce77cc56def870924a"
+    },
+    {
+      "head_sha": "f60c0d6e4e7f715f23ced53c1791c61255391a0c",
+      "base_sha": "d086db856be187255b8ec61ef409357393020f32",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-pallets-flask/pull/2",
+      "published_patch_sha256": "ebecaa538cb5e3d811913511de36a53f47350e9523bc39951a217766dc983363"
+    },
+    {
+      "head_sha": "1d0fe67bd87404bdc0a514e6a649bca4d7681fff",
+      "base_sha": "d086db856be187255b8ec61ef409357393020f32",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-pallets-flask/pull/1",
+      "published_patch_sha256": "77b9e16dc44596441b66bf92b967abb89dae6b6cd7938e7f5bc410e405823a19"
+    }
+  ],
+  "fastapi/fastapi": [
+    {
+      "head_sha": "f442c0f12fedf739c3c7e287db1d22fd115e88ce",
+      "base_sha": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastapi-fastapi/pull/7",
+      "published_patch_sha256": "bcb555d8149d9d12e65b1da8d4d1d4ceba0c71336f0bb78a8058c1a932013a98"
+    },
+    {
+      "head_sha": "0a880748ad5700190f9025a8e18ee968ba4d9c03",
+      "base_sha": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastapi-fastapi/pull/6",
+      "published_patch_sha256": "be4315647c09e369554f2865a64c5eb6b290082c61e6efbed20e0833f1c5c48e"
+    },
+    {
+      "head_sha": "ad18def665646fab54957d03c32e12045da29b06",
+      "base_sha": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastapi-fastapi/pull/5",
+      "published_patch_sha256": "47a7bb430048f5a3c7eeab1e80b2dd09e801620a8b2484efbb9d70a099094598"
+    },
+    {
+      "head_sha": "36a031b02c867f3b2b531a86dd13231d3bc04fc5",
+      "base_sha": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-fastapi-fastapi/pull/4",
+      "published_patch_sha256": "ac9c0a60e21ce0ad31613527f2ecdfc6857e6bbdc8038a59abc379410ad4fafa"
+    }
+  ],
+  "gofiber/fiber": [
+    {
+      "head_sha": "0d62eebb18bd6c24ec722eac53146617f677368e",
+      "base_sha": "56cd561f7d57addc730992c75a8bde59f050c413",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-gofiber-fiber/pull/4",
+      "published_patch_sha256": "29c50dac8b5da46b6014021e01c79637af2c0eb4be11737926da2c04fd014ed0"
+    },
+    {
+      "head_sha": "7b40df18807bfe7f7e4fb131b0b8dfca0c396332",
+      "base_sha": "56cd561f7d57addc730992c75a8bde59f050c413",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-gofiber-fiber/pull/3",
+      "published_patch_sha256": "48fb60026f6673ba114a3c9fe1d1f2cd6d2fd8518e4e16da543a67c988f22cf9"
+    },
+    {
+      "head_sha": "a6877dfb63a22af33a5db2435831a602ed057b10",
+      "base_sha": "56cd561f7d57addc730992c75a8bde59f050c413",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-gofiber-fiber/pull/2",
+      "published_patch_sha256": "8c2a719ee0e86e7340b732d81a7eafd97bb2a20e911c25ec7615b22456ec945d"
+    }
+  ]
 }

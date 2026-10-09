@@ -74,8 +74,9 @@ try:
  if execute(['git','-C',str(source),'rev-parse','HEAD^{tree}'])!=item['source_tree']:raise RuntimeError('Target source tree mismatch')
  if published_mode:
   pinned=json.loads((ROOT/'published-pins.json').read_text())[item['source']]
-  assert pinned['base_sha']==item['source_sha']
-  execute(['git','-C',str(source),'fetch','origin',pinned['head_sha']],env=authenv)
+  for pin in pinned if isinstance(pinned,list) else [pinned]:
+   assert pin['base_sha']==item['source_sha']
+   execute(['git','-C',str(source),'fetch','origin',pin['head_sha']],env=authenv)
   safeenv['PUBLISHED_PIN_JSON']=json.dumps(pinned)
   report['independent_published_control']=pinned
  execute(['chown','-R','autoapitest:autoapitest',str(source),str(out)])
