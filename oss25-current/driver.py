@@ -1,4 +1,4 @@
-import datetime,json,os,pathlib,pwd,re,subprocess,sys,time,urllib.request,urllib.error
+import datetime,json,os,pathlib,pwd,re,resource,subprocess,sys,time,urllib.request,urllib.error
 ROOT=pathlib.Path(__file__).resolve().parent
 inventory=json.loads((ROOT/'inventory.json').read_text())
 product=pathlib.Path('/opt/oss25/product')
@@ -34,6 +34,10 @@ if '--preflight' in sys.argv:
  record['finished_at']=now();(out/'infrastructure-preflight.json').write_text(redact(json.dumps(record,indent=2))+'\n')
  print(json.dumps(record));sys.exit(0 if record['status']=='passed' else 2)
 item=next(i for i in inventory if i['source']==os.environ['TARGET_SOURCE'])
+original_fd_limit=resource.getrlimit(resource.RLIMIT_NOFILE)
+if item['source']=='eslint/eslint':
+ # Verified in this exact source commit's successful Linux CI log.
+ resource.setrlimit(resource.RLIMIT_NOFILE,(65536,original_fd_limit[1]))
 upstream_mode='--upstream-control' in sys.argv
 baseline_mode='--baseline' in sys.argv or upstream_mode
 limit=os.environ.get('TARGET_CANDIDATE_LIMIT','all') or 'all'
@@ -51,6 +55,7 @@ safeenv.update(GOPATH='/home/autoapitest/go')
 safeenv.update(GH_CONFIG_DIR='/home/autoapitest/.config/gh',XDG_CONFIG_HOME='/home/autoapitest/.config',XDG_CACHE_HOME='/home/autoapitest/.cache',XDG_DATA_HOME='/home/autoapitest/.local/share',XDG_STATE_HOME='/home/autoapitest/.local/state',PNPM_HOME='/home/autoapitest/.local/share/pnpm',npm_config_cache='/home/autoapitest/.npm',GIT_CONFIG_GLOBAL='/home/autoapitest/.gitconfig',GIT_CONFIG_NOSYSTEM='1',UV_CACHE_DIR='/home/autoapitest/.cache/uv',BUN_INSTALL_CACHE_DIR='/home/autoapitest/.bun-cache',GOCACHE='/home/autoapitest/.cache/go-build',GOMODCACHE='/home/autoapitest/go/pkg/mod')
 report={'product_sha':'03a297f00411464e35ff6f3ead572fc38360a9bf','source':item['source'],'source_sha':item['source_sha'],'source_tree':item['source_tree'],'test_repository':item['test_repository'],'started_at':now(),'status':'starting','candidate_limit':'all supported manifest declarations within the product 60-minute policy','command_path':'unchanged run-dovel-flow.mjs','upstream_workflows_disabled':True}
 report['candidate_limit_mode']=limit
+report['file_descriptor_limits']={'coordinator_original':list(original_fd_limit),'repository_effective':list(resource.getrlimit(resource.RLIMIT_NOFILE)),'eslint_frozen_upstream_linux_soft_limit':65536 if item['source']=='eslint/eslint' else None}
 def save():(out/'summary.json').write_text(redact(json.dumps(report,indent=2))+'\n')
 def execute(args,env=None,cwd=None):
  if args[0]=='git':args=['git','-c','safe.directory='+str(source),'-c','safe.directory='+str(product),*args[1:]]

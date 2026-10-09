@@ -31,6 +31,8 @@ jobs:
           sudo sysctl -w kernel.yama.ptrace_scope=2
           test "$(cat /proc/sys/kernel/yama/ptrace_scope)" = 2
           test "$(awk '/MemTotal/ {print $2}' /proc/meminfo)" -ge 14680064
+          python3 -c 'import resource; print("original Actions descriptor limits", resource.getrlimit(resource.RLIMIT_NOFILE))'
+          sudo python3 -c 'import resource; print("privileged coordinator descriptor limits", resource.getrlimit(resource.RLIMIT_NOFILE))'
           uname -m
           free -h
           df -h /
