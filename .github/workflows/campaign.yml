@@ -7,7 +7,7 @@ on:
         type: choice
         required: true
         default: infrastructure
-        options: [infrastructure, preflight, full, baseline, upstream_control, components]
+        options: [infrastructure, preflight, full, baseline, upstream_control, published_control, components]
       candidate_limit:
         type: choice
         required: true
@@ -119,7 +119,7 @@ jobs:
           name: components
           path: encrypted-evidence/*
   repository:
-    if: inputs.phase == 'full' || inputs.phase == 'baseline' || inputs.phase == 'upstream_control'
+    if: inputs.phase == 'full' || inputs.phase == 'baseline' || inputs.phase == 'upstream_control' || inputs.phase == 'published_control'
     runs-on: ${{ matrix.source == 'elixir-plug/plug' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
     timeout-minutes: 150
     environment: oss25-current-20261008
@@ -261,6 +261,9 @@ jobs:
           OSS25_OPERATOR_TOKEN: ${{ secrets.OSS25_OPERATOR_TOKEN }}
           OSS25_MODEL_API_KEY: ${{ secrets.OSS25_MODEL_API_KEY }}
         run: |
+          if [ "$TARGET_TEST_PHASE" = published_control ]; then
+            exec sudo --preserve-env=PATH,GITHUB_WORKSPACE,TARGET_SOURCE,TARGET_CANDIDATE_LIMIT,OSS25_OPERATOR_TOKEN,OSS25_MODEL_API_KEY /usr/bin/env PATH="$PATH" python3 /opt/oss25/harness/driver.py --published-control
+          fi
           if [ "$TARGET_TEST_PHASE" = upstream_control ]; then
             exec sudo --preserve-env=PATH,GITHUB_WORKSPACE,TARGET_SOURCE,TARGET_CANDIDATE_LIMIT,OSS25_OPERATOR_TOKEN,OSS25_MODEL_API_KEY /usr/bin/env PATH="$PATH" python3 /opt/oss25/harness/driver.py --upstream-control
           fi

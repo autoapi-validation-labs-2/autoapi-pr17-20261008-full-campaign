@@ -39,7 +39,8 @@ if item['source']=='eslint/eslint':
  # Verified in this exact source commit's successful Linux CI log.
  resource.setrlimit(resource.RLIMIT_NOFILE,(65536,original_fd_limit[1]))
 upstream_mode='--upstream-control' in sys.argv
-baseline_mode='--baseline' in sys.argv or upstream_mode
+published_mode='--published-control' in sys.argv
+baseline_mode='--baseline' in sys.argv or upstream_mode or published_mode
 limit=os.environ.get('TARGET_CANDIDATE_LIMIT','all') or 'all'
 if limit not in ['all','3']:raise RuntimeError('Unapproved candidate limit')
 limit_arg='2147483647' if limit=='all' else '3'
@@ -71,6 +72,12 @@ try:
  execute(['git','-c','filter.lfs.required=false','-c','filter.lfs.smudge=','-c','filter.lfs.process=','clone','https://github.com/'+item['test_repository']+'.git',str(source)],env=authenv)
  execute(['git','-C',str(source),'checkout','--detach',item['source_sha']],env=safeenv)
  if execute(['git','-C',str(source),'rev-parse','HEAD^{tree}'])!=item['source_tree']:raise RuntimeError('Target source tree mismatch')
+ if published_mode:
+  pinned=json.loads((ROOT/'published-pins.json').read_text())[item['source']]
+  assert pinned['base_sha']==item['source_sha']
+  execute(['git','-C',str(source),'fetch','origin',pinned['head_sha']],env=authenv)
+  safeenv['PUBLISHED_PIN_JSON']=json.dumps(pinned)
+  report['independent_published_control']=pinned
  execute(['chown','-R','autoapitest:autoapitest',str(source),str(out)])
  execute(['chown','-R','root:root',str(product)])
  execute(['chmod','-R','go-w',str(product)])
@@ -112,7 +119,7 @@ try:
  report['runtime_php']=execute(['php','--version']).splitlines()[0]
  command=[node,'--import',str(product/'packages/part-a/node_modules/tsx/dist/loader.mjs'),str(product/'scripts/run-dovel-flow.mjs'),'--secrets-stdin','--repository',str(source),'--owner',item['test_repository'].split('/')[0],'--name',item['test_repository'].split('/')[1],'--max-candidates',limit_arg,'--max-runtime-minutes','60','--open-pr','true','--output-dir',str(out)]
  if baseline_mode:
-  command=[node,'--import',str(product/'packages/part-a/node_modules/tsx/dist/loader.mjs'),str(ROOT/('upstream_control.mjs' if upstream_mode else 'baseline_controller.mjs')),str(product),str(source),str(out)]
+  command=[node,'--import',str(product/'packages/part-a/node_modules/tsx/dist/loader.mjs'),str(ROOT/('published_control.mjs' if published_mode else 'upstream_control.mjs' if upstream_mode else 'baseline_controller.mjs')),str(product),str(source),str(out)]
   report['command_path']='independent unchanged-source baseline control; no model requests or publication'
  report['node_heap_limit_mib']=10240
  report['host_memtotal_kib']=next(line.split(':',1)[1].strip() for line in pathlib.Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemTotal:'))
