@@ -45,7 +45,7 @@ const save=()=>fs.writeFile(path.join(out,'upstream-control.json'),JSON.stringif
 let service,serviceLog;
 try{
  record.environment=['Independent Linux control uses the externally provisioned source-CI host profile; product CI inference is not used.'];
- if(target==='fastapi/fastapi')process.env.COVERAGE_FILE=path.join(source,'coverage','.coverage.linux-control');
+ if(target==='fastapi/fastapi'){process.env.COVERAGE_FILE=path.join(source,'coverage','.coverage.linux-control');process.env.UV_PYTHON='3.13';process.env.UV_RESOLUTION='highest';process.env.STARLETTE_SRC='starlette-pypi';}
  if(target==='fastify/fastify')delete process.env.NODE_ENV;
  if(target==='puma/puma'){delete process.env.PUMA_NO_RUBOCOP;process.env.PUMA_TEST_DEBUG='true';process.env.TESTOPTS='-v';}
  if(target==='vuejs/core')process.env.PUPPETEER_SKIP_DOWNLOAD='true';
@@ -72,4 +72,8 @@ try{
  record.status=record.commands.length===commands.length&&record.commands.every(c=>c.exitCode===0)?'passed':'original_ci_producer_failed';
 }catch(error){record.status='control_error';record.error=error instanceof Error?error.message:String(error);}
 if(service){try{process.kill(-service.pid,'SIGTERM')}catch{}}if(serviceLog)serviceLog.end();
+record.source_head_after=execFileSync('git',['-C',source,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
+const drift=execFileSync('git',['-C',source,'diff','--binary','HEAD'],{maxBuffer:32*1024*1024});
+record.generated_source_drift_bytes=drift.length;
+if(drift.length)await fs.writeFile(path.join(out,'upstream-source-install-build-drift.patch'),drift);
 record.finished_at=new Date().toISOString();await save();process.exitCode=record.status==='passed'?0:2;
