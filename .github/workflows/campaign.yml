@@ -1,5 +1,5 @@
 name: PR17 updated 25-repository full campaign
-run-name: PR17 db16e1a8 25 repos ${{ inputs.phase }}
+run-name: PR17 03a297f0 25 repos ${{ inputs.phase }}
 on:
   workflow_dispatch:
     inputs:
@@ -7,7 +7,7 @@ on:
         type: choice
         required: true
         default: infrastructure
-        options: [infrastructure, preflight, full, baseline, upstream_control]
+        options: [infrastructure, preflight, full, baseline, upstream_control, components]
       candidate_limit:
         type: choice
         required: true
@@ -16,7 +16,7 @@ on:
       repositories:
         type: string
         required: true
-        default: '["axios/axios", "expressjs/express", "fastify/fastify", "eslint/eslint", "nodejs/undici", "vitejs/vite", "sveltejs/svelte", "vuejs/core", "elysiajs/elysia", "trpc/trpc", "pallets/flask", "encode/httpx", "fastapi/fastapi", "gin-gonic/gin", "go-chi/chi", "labstack/echo", "gofiber/fiber", "sharkdp/bat", "BurntSushi/ripgrep", "puma/puma", "sinatra/sinatra", "slimphp/Slim", "guzzle/guzzle", "elixir-plug/plug", "google/gson"]'
+        default: '["axios/axios", "expressjs/express", "fastify/fastify", "eslint/eslint", "nodejs/undici", "vitejs/vite", "sveltejs/svelte", "vuejs/core", "elysiajs/elysia", "trpc/trpc", "pallets/flask", "encode/httpx", "fastapi/fastapi", "gin-gonic/gin", "labstack/echo", "gofiber/fiber", "sharkdp/bat", "BurntSushi/ripgrep", "puma/puma", "sinatra/sinatra", "slimphp/Slim", "guzzle/guzzle", "elixir-plug/plug", "google/gson", "psf/requests"]'
 permissions:
   contents: read
 jobs:
@@ -58,6 +58,51 @@ jobs:
         with:
           name: infrastructure-preflight
           path: encrypted-evidence/*
+  components:
+    if: inputs.phase == 'components'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    environment: oss25-current-20261008
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: harness
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Nuclescript/Automated-API-and-Data
+          token: ${{ secrets.OSS25_OPERATOR_TOKEN }}
+          ref: 03a297f00411464e35ff6f3ead572fc38360a9bf
+          path: product
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.21.0'
+      - name: Test unchanged product on Linux
+        run: |
+          set -euo pipefail
+          mkdir evidence
+          cd product
+          test "$(git rev-parse HEAD)" = 03a297f00411464e35ff6f3ead572fc38360a9bf
+          corepack enable
+          corepack prepare pnpm@11.19.0 --activate
+          pnpm install --frozen-lockfile > ../evidence/component-install.log 2>&1
+          code=0
+          pnpm typecheck > ../evidence/component-typecheck.log 2>&1 || code=1
+          pnpm test > ../evidence/component-tests.log 2>&1 || code=1
+          git diff --exit-code > ../evidence/component-source-integrity.log 2>&1 || code=1
+          echo "$code" > ../evidence/component-exit.txt
+          exit "$code"
+      - name: Encrypt component evidence
+        if: always()
+        env:
+          OSS25_MODEL_API_KEY: ${{ secrets.OSS25_MODEL_API_KEY }}
+        run: python3 harness/oss25-current/encrypt_evidence.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: components
+          path: encrypted-evidence/*
   repository:
     if: inputs.phase == 'full' || inputs.phase == 'baseline' || inputs.phase == 'upstream_control'
     runs-on: ubuntu-24.04
@@ -75,9 +120,9 @@ jobs:
           persist-credentials: false
       - uses: actions/checkout@v4
         with:
-          repository: Test364758697/Automated-API-and-Data
+          repository: Nuclescript/Automated-API-and-Data
           token: ${{ secrets.OSS25_OPERATOR_TOKEN }}
-          ref: db16e1a8f6372cdd47c018a5ac537b88ad9cda69
+          ref: 03a297f00411464e35ff6f3ead572fc38360a9bf
           path: product
           persist-credentials: false
       - name: Prepare isolated Linux host and writable capacity
@@ -113,7 +158,7 @@ jobs:
           update: true
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.source == 'trpc/trpc' && '24.21.0' || '24.20.0' }}
+          node-version: ${{ matrix.source == 'axios/axios' && '26.11.1' || '24.21.0' }}
       - uses: actions/setup-go@v5
         with:
           go-version: ${{ (matrix.source == 'labstack/echo' || matrix.source == 'gofiber/fiber') && '1.27.1' || '1.26.5' }}
@@ -123,7 +168,7 @@ jobs:
           ruby-version: '3.3'
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.source == 'pallets/flask' && '3.10' || '3.12' }}
+          python-version: ${{ matrix.source == 'psf/requests' && '3.10' || '3.11' }}
       - uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124
         if: matrix.source == 'elixir-plug/plug'
         with:
@@ -145,7 +190,7 @@ jobs:
         working-directory: product
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = db16e1a8f6372cdd47c018a5ac537b88ad9cda69
+          test "$(git rev-parse HEAD)" = 03a297f00411464e35ff6f3ead572fc38360a9bf
           corepack enable
           corepack prepare pnpm@11.19.0 --activate
           { pnpm install --frozen-lockfile && pnpm build && git diff --exit-code; } > product-build.log 2>&1 || { echo "Frozen product build failed; detailed logs will be encrypted."; exit 1; }
@@ -172,9 +217,9 @@ jobs:
         if: matrix.source == 'trpc/trpc'
         run: |
           set -euo pipefail
-          sudo docker pull postgres
-          sudo docker image inspect postgres --format '{{json .RepoDigests}}'
-          sudo docker run --detach --name oss25-postgres -e POSTGRES_USER=postgres -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=trpcdb -p 127.0.0.1:5432:5432 postgres
+          sudo docker pull postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
+          sudo docker image inspect postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336 --format '{{json .RepoDigests}}'
+          sudo docker run --detach --name oss25-postgres -e POSTGRES_USER=postgres -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=trpcdb -p 127.0.0.1:5432:5432 postgres@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336
           for attempt in $(seq 1 60); do
             if sudo docker exec oss25-postgres pg_isready -U postgres -d trpcdb; then exit 0; fi
             sleep 1

@@ -1,227 +1,394 @@
 [
   {
     "source": "axios/axios",
-    "source_sha": "28e9b84ac59c034260c1927f4a0b7c022b6b0071",
-    "source_tree": "08eb715d521d6bd3d5ecb900ade67b5c4d7fe06c",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-axios-axios",
+    "source_sha": "f694ecd6ac49bb1917e086b5e532e1627c62d43a",
+    "source_tree": "c26db1142e3e5341aa02ed17cc93c190c977a673",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-axios-axios",
     "default_branch": "v1.x",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/bundle-size.yml",
+      ".github/workflows/lockfile-lint.yml",
+      ".github/workflows/moderator.yml",
+      ".github/workflows/publish.yml",
+      ".github/workflows/release-branch.yml",
+      ".github/workflows/run-ci.yml",
+      ".github/workflows/verify-build-reproducibility.yml",
+      ".github/workflows/zizmor.yml"
+    ]
   },
   {
     "source": "expressjs/express",
-    "source_sha": "7ef98448f8b38099ab1ded55e458538ad47a51e7",
-    "source_tree": "aa5a18060047874ea003bb8680611250a595d39e",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-expressjs-express",
+    "source_sha": "a419aa7350389a275ab45fde2e849ed1f02449ef",
+    "source_tree": "5f7326c98990506a948080ff68d593ef9969d028",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-expressjs-express",
     "default_branch": "master",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/ci.yml",
+      ".github/workflows/codeql.yml",
+      ".github/workflows/legacy.yml",
+      ".github/workflows/npm-publish.yml",
+      ".github/workflows/scorecard.yml"
+    ]
   },
   {
     "source": "fastify/fastify",
-    "source_sha": "0d945819bebc08f4ca666d8283c03a26ed9706a0",
-    "source_tree": "2e5ef1d60d0020414495c1ddcc89b754e84816d7",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-fastify-fastify",
+    "source_sha": "5c081d4b7237f0eb2db9f1204dc6400e3aa1325e",
+    "source_tree": "145dc26318d3efe0f5d73de08f6a95593665fc7a",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-fastify-fastify",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/backport.yml",
+      ".github/workflows/ci-alternative-runtime.yml",
+      ".github/workflows/ci.yml",
+      ".github/workflows/citgm-package.yml",
+      ".github/workflows/citgm.yml",
+      ".github/workflows/coverage-nix.yml",
+      ".github/workflows/integration-alternative-runtimes.yml",
+      ".github/workflows/integration.yml",
+      ".github/workflows/labeler.yml",
+      ".github/workflows/links-check.yml",
+      ".github/workflows/lint-ecosystem-order.yml",
+      ".github/workflows/md-lint.yml",
+      ".github/workflows/missing_types.yml",
+      ".github/workflows/package-manager-ci.yml",
+      ".github/workflows/pull-request-title.yml",
+      ".github/workflows/test-compare.yml",
+      ".github/workflows/validate-ecosystem-links.yml",
+      ".github/workflows/website.yml"
+    ]
   },
   {
     "source": "eslint/eslint",
-    "source_sha": "e5aea414cc00555ecd43f6e608bf80e0f9a6d4d6",
-    "source_tree": "1a243003906c227d86d16599cf72b5ed82a0902e",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-eslint-eslint",
+    "source_sha": "a39d9fb1fdb5db546f6407580cac531ba3370450",
+    "source_tree": "41f9e596342917b13aa0b913d33685c0fe5a3c12",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-eslint-eslint",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/ci.yml",
+      ".github/workflows/codeql-analysis.yml",
+      ".github/workflows/docs-ci.yml",
+      ".github/workflows/ecosystem-tests.yml",
+      ".github/workflows/ecosystem-updates.yml",
+      ".github/workflows/pr-labeler.yml",
+      ".github/workflows/rebuild-docs-sites.yml",
+      ".github/workflows/types-integration.yml",
+      ".github/workflows/update-readme.yml"
+    ]
   },
   {
     "source": "nodejs/undici",
-    "source_sha": "1e3e94e954f7c571bda74ce52c10eefa64ef98ff",
-    "source_tree": "760b9736f820b489690f4686f60319b65aa7c83c",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-nodejs-undici-native-retry1",
+    "source_sha": "6fa5bb9b1a9b0f2747c0018030129ef75722c73b",
+    "source_tree": "7acce2d01f4abc848090649a6312196d7886b408",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-nodejs-undici",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/autobahn.yml",
+      ".github/workflows/backport.yml",
+      ".github/workflows/bench.yml",
+      ".github/workflows/ci.yml",
+      ".github/workflows/codeql.yml",
+      ".github/workflows/nodejs-nightly.yml",
+      ".github/workflows/nodejs-shared.yml",
+      ".github/workflows/release-create-pr.yml",
+      ".github/workflows/release.yml",
+      ".github/workflows/scorecard.yml",
+      ".github/workflows/update-submodules.yml"
+    ]
   },
   {
     "source": "vitejs/vite",
-    "source_sha": "fea5b21dd9524ed7308632407b996f1fe5942c9c",
-    "source_tree": "a326e9ed0cd038594cec76e5be6c80eb951d25ae",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-vitejs-vite",
+    "source_sha": "3b72997d42e7dd2b31898d0e68461e3025e836b6",
+    "source_tree": "d6c78801be4445dfb8408b4fc16aac123dc28e54",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-vitejs-vite",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/bot.yml",
+      ".github/workflows/ci.yml",
+      ".github/workflows/copilot-setup-steps.yml",
+      ".github/workflows/ecosystem-ci-trigger.yml",
+      ".github/workflows/issue-close-require.yml",
+      ".github/workflows/issue-labeled.yml",
+      ".github/workflows/lock-closed-issues.yml",
+      ".github/workflows/prepare-release.yml",
+      ".github/workflows/preview-release.yml",
+      ".github/workflows/publish.yml",
+      ".github/workflows/semantic-pull-request.yml",
+      ".github/workflows/semgrep.yml",
+      ".github/workflows/zizmor.yml"
+    ]
   },
   {
     "source": "sveltejs/svelte",
-    "source_sha": "3f885e30161bebd61939fb02065d539c76369398",
-    "source_tree": "ce2fe9cbc6aedae4df694865830f4cb9f7613818",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-sveltejs-svelte",
+    "source_sha": "707c28146b0f0a6d5404a1bd4769874c3c24851a",
+    "source_tree": "1802794feeb2527705bda2843536d7c1b3130e33",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-sveltejs-svelte",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/autofix.yml",
+      ".github/workflows/ci.yml",
+      ".github/workflows/ecosystem-ci-trigger.yml",
+      ".github/workflows/release.yml"
+    ]
   },
   {
     "source": "vuejs/core",
     "source_sha": "4ab865a848a1da3d10fb674f857e5fff13094644",
     "source_tree": "35a58db0e23da8cd91569cc563c274073642b6d4",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-vuejs-core",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-vuejs-core",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/autofix.yml",
+      ".github/workflows/ci.yml",
+      ".github/workflows/ecosystem-ci-trigger.yml",
+      ".github/workflows/lock-closed-issues.yml",
+      ".github/workflows/release.yml",
+      ".github/workflows/size-data.yml",
+      ".github/workflows/size-report.yml",
+      ".github/workflows/test.yml"
+    ]
   },
   {
     "source": "elysiajs/elysia",
     "source_sha": "e037eca710e7ad193be09cc6615ab0dbe54af914",
     "source_tree": "c0959135c36ebbaa4a3c652982664966da8c95bc",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-elysiajs-elysia",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-elysiajs-elysia",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/ci.yml",
+      ".github/workflows/publish.yml"
+    ]
   },
   {
     "source": "trpc/trpc",
     "source_sha": "d756e591a5e37ef20b8d75ecd4d736c195497289",
     "source_tree": "7b8b4b32071828d83aac0458e79f4de7ffdaf74e",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-trpc-trpc",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-trpc-trpc",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/check-skills.yml",
+      ".github/workflows/codeql-analysis.yml",
+      ".github/workflows/dependabot-approve.yml",
+      ".github/workflows/labeler.yml",
+      ".github/workflows/lint.yml",
+      ".github/workflows/lock-issues.yml",
+      ".github/workflows/main.yml",
+      ".github/workflows/notify-intent.yml",
+      ".github/workflows/release.yml",
+      ".github/workflows/semantic-pr.yml",
+      ".github/workflows/subtree.yml",
+      ".github/workflows/validate-skills.yml"
+    ]
   },
   {
     "source": "pallets/flask",
-    "source_sha": "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35",
-    "source_tree": "d46b1a2a2cc4219b0ad5060ab618e9f5ae635680",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-pallets-flask",
+    "source_sha": "d086db856be187255b8ec61ef409357393020f32",
+    "source_tree": "b7c01f0b37b4ebe6c21d107b5f02632211f1c18b",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-pallets-flask",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/lock.yaml",
+      ".github/workflows/pre-commit.yaml",
+      ".github/workflows/publish.yaml",
+      ".github/workflows/tests.yaml",
+      ".github/workflows/zizmor.yaml"
+    ]
   },
   {
     "source": "encode/httpx",
     "source_sha": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
     "source_tree": "31ba94512339180efacceacc0646b56ee15eba63",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-encode-httpx",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-encode-httpx",
     "default_branch": "master",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/publish.yml",
+      ".github/workflows/test-suite.yml"
+    ]
   },
   {
     "source": "fastapi/fastapi",
-    "source_sha": "6e659e84de09ee06e0499141f7f4951f478ddbac",
-    "source_tree": "b05103c5e2840cd62d4569942caa5b57b685def4",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-fastapi-fastapi",
+    "source_sha": "f5c6e9b4f9cadc1bf0f9a1fd672e621206b63007",
+    "source_tree": "9517233529e09d6421e49df7216f5cfc84baf4f4",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-fastapi-fastapi",
     "default_branch": "master",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/add-to-project.yml",
+      ".github/workflows/build-docs.yml",
+      ".github/workflows/bump-pre-commit-hooks.yml",
+      ".github/workflows/create-draft-release.yml",
+      ".github/workflows/deploy-docs.yml",
+      ".github/workflows/detect-conflicts.yml",
+      ".github/workflows/guard-dependencies.yml",
+      ".github/workflows/issue-manager.yml",
+      ".github/workflows/label-approved.yml",
+      ".github/workflows/notify-translations.yml",
+      ".github/workflows/pre-commit.yml",
+      ".github/workflows/prepare-release.yml",
+      ".github/workflows/publish.yml",
+      ".github/workflows/smokeshow.yml",
+      ".github/workflows/sponsors.yml",
+      ".github/workflows/test-redistribute.yml",
+      ".github/workflows/test.yml",
+      ".github/workflows/topic-repos.yml",
+      ".github/workflows/translate.yml",
+      ".github/workflows/zizmor.yml"
+    ]
   },
   {
     "source": "gin-gonic/gin",
     "source_sha": "43fe48e8a0f44af783116cdb010725e6bb50255f",
     "source_tree": "895f98dfe0d3f21c3a55c0814995eedaf4989c99",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-gin-gonic-gin",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-gin-gonic-gin",
     "default_branch": "master",
-    "status": "ready",
-    "actions_disabled": true
-  },
-  {
-    "source": "go-chi/chi",
-    "source_sha": "167e1e3bd039d060696b99c8da4e876ae04f42c1",
-    "source_tree": "78ea402444f50acbf2de96c413503d75ef8b6e54",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-go-chi-chi",
-    "default_branch": "master",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/codeql.yml",
+      ".github/workflows/gin.yml",
+      ".github/workflows/goreleaser.yml",
+      ".github/workflows/trivy-scan.yml"
+    ]
   },
   {
     "source": "labstack/echo",
-    "source_sha": "296824015d4a6345531fa71e9233fd42879f2c69",
-    "source_tree": "5dbee64b7700fb53d0385e283add0f7b48fcb574",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-labstack-echo",
+    "source_sha": "3882266a3641a36fc2111b48cd597adab1c1ecea",
+    "source_tree": "dfc4119eb240ebf16da8a8324549858854c8d82f",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-labstack-echo",
     "default_branch": "master",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/checks.yml",
+      ".github/workflows/ci.yml"
+    ]
   },
   {
     "source": "gofiber/fiber",
-    "source_sha": "72a4d45b2875a8271ff318b2ac10ee53217991db",
-    "source_tree": "ffa93f95bcdc33c4917a26d7561527377e9eb50d",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-gofiber-fiber-native-retry1",
+    "source_sha": "56cd561f7d57addc730992c75a8bde59f050c413",
+    "source_tree": "c7439c8c3bddf387a3980ec9e56cf7db868318ab",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-gofiber-fiber",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/after-release.yml",
+      ".github/workflows/cleanup-release-draft.yml",
+      ".github/workflows/deadcode.yml",
+      ".github/workflows/manual-dependabot.yml",
+      ".github/workflows/markdown.yml",
+      ".github/workflows/move-closed-milestone-items.yml",
+      ".github/workflows/pr-commands.yml",
+      ".github/workflows/release-drafter.yml",
+      ".github/workflows/spell-check.yml",
+      ".github/workflows/test.yml",
+      ".github/workflows/update-version.yml",
+      ".github/workflows/v3-label-automation.yml",
+      ".github/workflows/vulncheck.yml"
+    ]
   },
   {
     "source": "sharkdp/bat",
-    "source_sha": "4608fc959aa8abf80d32198836511a570b7ae9ea",
-    "source_tree": "d6f24e4b0f2a3d6fd82e76b065da3f9f4a7fd84c",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-sharkdp-bat",
+    "source_sha": "d9559c69f541873f8c47ac8ad81d985f4441edf6",
+    "source_tree": "3acc675c2868c06ee27307c7a021e413417a501f",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-sharkdp-bat",
     "default_branch": "master",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/CICD.yml",
+      ".github/workflows/require-changelog-for-PRs.yml"
+    ]
   },
   {
     "source": "BurntSushi/ripgrep",
     "source_sha": "3fce3b5bb0236da2df6d99672afb8a719642eca7",
     "source_tree": "856ed9162d23416ee7dc5f4389975b54ca062f60",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-burntsushi-ripgrep",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-burntsushi-ripgrep",
     "default_branch": "master",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/ci.yml",
+      ".github/workflows/release.yml"
+    ]
   },
   {
     "source": "puma/puma",
-    "source_sha": "e17bc91ea500c8c643295208f4444bf454ae1b8c",
-    "source_tree": "6afc347892230c226caeb1e19afe3d099990cb6e",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-puma-puma-native-retry1",
+    "source_sha": "268a413e05d2dfc3baa4cc75026cb20e9bbe2217",
+    "source_tree": "45da53116b699ec28f74c6a7c417a30a487a2b27",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-puma-puma",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/pr-label-status.yml",
+      ".github/workflows/rack_conform.yml",
+      ".github/workflows/ragel.yml",
+      ".github/workflows/release-checks.yml",
+      ".github/workflows/skip_duplicate_workflow_runs.yml",
+      ".github/workflows/tests.yml",
+      ".github/workflows/turbo-rails.yml"
+    ]
   },
   {
     "source": "sinatra/sinatra",
     "source_sha": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
     "source_tree": "96851f3f7a72f9b05c096b1d7165b7f079878acd",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-sinatra-sinatra",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-sinatra-sinatra",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/release.yml",
+      ".github/workflows/test.yml"
+    ]
   },
   {
     "source": "slimphp/Slim",
     "source_sha": "3675bf6baac66b07032575b7bef4200b60b7974b",
     "source_tree": "7ec36d9648a03f0988c0e8077f9dbca499799d67",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-slimphp-slim-native-retry1",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-slimphp-slim",
     "default_branch": "4.x",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/tests.yml"
+    ]
   },
   {
     "source": "guzzle/guzzle",
     "source_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
     "source_tree": "4599f56eb184603c924f56c56486a95a71559ea8",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-guzzle-guzzle",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle",
     "default_branch": "8.2",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/ci.yml",
+      ".github/workflows/static.yml"
+    ]
   },
   {
     "source": "elixir-plug/plug",
     "source_sha": "73404f851852a00ffb2014be95d4598900fa77b8",
     "source_tree": "9083c57f338d931774b5070cec6736a3c09b5844",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-elixir-plug-plug",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-elixir-plug-plug",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/ci.yml"
+    ]
   },
   {
     "source": "google/gson",
     "source_sha": "845664ba1c307e6c1910d07cfed2f622e0ad8df1",
     "source_tree": "2e4eb85b5b5587d5d95ac1b3d830d5113a16fa14",
-    "test_repository": "APPNINJAS123/autoapi-pr17-20261008-google-gson",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-google-gson",
     "default_branch": "main",
-    "status": "ready",
-    "actions_disabled": true
+    "linux_workflows": [
+      ".github/workflows/build.yml",
+      ".github/workflows/check-android-compatibility.yml",
+      ".github/workflows/check-api-compatibility.yml",
+      ".github/workflows/cifuzz.yml",
+      ".github/workflows/codeql-analysis.yml",
+      ".github/workflows/scorecard.yml"
+    ]
+  },
+  {
+    "source": "psf/requests",
+    "source_sha": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+    "source_tree": "10caa09e09cd366febe74c2afa345939ffd5691f",
+    "test_repository": "APPNINJAS123/autoapi-pr17-20261009-psf-requests",
+    "default_branch": "main",
+    "linux_workflows": [
+      ".github/workflows/close-issues.yml",
+      ".github/workflows/codeql-analysis.yml",
+      ".github/workflows/lint.yml",
+      ".github/workflows/lock-issues.yml",
+      ".github/workflows/publish.yml",
+      ".github/workflows/run-tests.yml",
+      ".github/workflows/typecheck.yml",
+      ".github/workflows/zizmor.yml"
+    ]
   }
 ]

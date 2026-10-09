@@ -42,14 +42,14 @@ limit_arg='2147483647' if limit=='all' else '3'
 user=pwd.getpwnam('autoapitest')
 source=pathlib.Path('/home/autoapitest/source')
 safeenv={k:v for k,v in os.environ.items() if not any(s in k.upper() for s in ['TOKEN','SECRET','PASSWORD','PRIVATE_KEY','API_KEY','OSS25_','GITHUB_TOKEN'])}
-safeenv.update(HOME='/home/autoapitest',RUNNER_TOOL_CACHE='/home/autoapitest/toolcache',TMPDIR='/home/autoapitest/tmp',COREPACK_HOME='/home/autoapitest/corepack',REVIEWER_RUNTIME='openrouter',CI='true',GOMAXPROCS='4',CARGO_BUILD_JOBS='4',MAVEN_OPTS='-Xmx2048m',NODE_OPTIONS='--max-old-space-size=10240',RUSTUP_HOME='/opt/oss25/rustup',CARGO_HOME='/home/autoapitest/.cargo',XDEBUG_MODE='coverage',DOVEL_PRODUCT_SHA='db16e1a8f6372cdd47c018a5ac537b88ad9cda69')
+safeenv.update(HOME='/home/autoapitest',RUNNER_TOOL_CACHE='/home/autoapitest/toolcache',TMPDIR='/home/autoapitest/tmp',COREPACK_HOME='/home/autoapitest/corepack',REVIEWER_RUNTIME='openrouter',CI='true',GOMAXPROCS='4',CARGO_BUILD_JOBS='4',MAVEN_OPTS='-Xmx2048m',NODE_OPTIONS='--max-old-space-size=10240',RUSTUP_HOME='/opt/oss25/rustup',CARGO_HOME='/home/autoapitest/.cargo',XDEBUG_MODE='coverage',DOVEL_PRODUCT_SHA='03a297f00411464e35ff6f3ead572fc38360a9bf')
 safeenv['PATH']='/opt/oss25/maven/bin:/opt/oss25/beam/elixir/bin:/opt/oss25/beam/otp/bin:/home/autoapitest/.gem/bin:/home/autoapitest/.cargo/bin:/opt/oss25/cargo-bin:'+':'.join(p for p in safeenv['PATH'].split(':') if not p.startswith('/home/runner/'))
 safeenv['GEM_HOME']='/home/autoapitest/.gem'
 safeenv.update(GITHUB_WORKSPACE=str(source),RUNNER_TEMP='/home/autoapitest/tmp',GITHUB_ENV='/home/autoapitest/github-env',GITHUB_OUTPUT='/home/autoapitest/github-output',GITHUB_PATH='/home/autoapitest/github-path',GITHUB_STEP_SUMMARY='/home/autoapitest/github-summary')
 safeenv.update(PLAYWRIGHT_BROWSERS_PATH='/home/autoapitest/.cache/ms-playwright',DISPLAY=':99',XDG_RUNTIME_DIR='/home/autoapitest/.runtime')
 safeenv.update(GOPATH='/home/autoapitest/go')
 safeenv.update(GH_CONFIG_DIR='/home/autoapitest/.config/gh',XDG_CONFIG_HOME='/home/autoapitest/.config',XDG_CACHE_HOME='/home/autoapitest/.cache',XDG_DATA_HOME='/home/autoapitest/.local/share',XDG_STATE_HOME='/home/autoapitest/.local/state',PNPM_HOME='/home/autoapitest/.local/share/pnpm',npm_config_cache='/home/autoapitest/.npm',GIT_CONFIG_GLOBAL='/home/autoapitest/.gitconfig',GIT_CONFIG_NOSYSTEM='1',UV_CACHE_DIR='/home/autoapitest/.cache/uv',BUN_INSTALL_CACHE_DIR='/home/autoapitest/.bun-cache',GOCACHE='/home/autoapitest/.cache/go-build',GOMODCACHE='/home/autoapitest/go/pkg/mod')
-report={'product_sha':'db16e1a8f6372cdd47c018a5ac537b88ad9cda69','source':item['source'],'source_sha':item['source_sha'],'source_tree':item['source_tree'],'test_repository':item['test_repository'],'started_at':now(),'status':'starting','candidate_limit':'all supported manifest declarations within the product 60-minute policy','command_path':'unchanged run-dovel-flow.mjs','upstream_workflows_disabled':True}
+report={'product_sha':'03a297f00411464e35ff6f3ead572fc38360a9bf','source':item['source'],'source_sha':item['source_sha'],'source_tree':item['source_tree'],'test_repository':item['test_repository'],'started_at':now(),'status':'starting','candidate_limit':'all supported manifest declarations within the product 60-minute policy','command_path':'unchanged run-dovel-flow.mjs','upstream_workflows_disabled':True}
 report['candidate_limit_mode']=limit
 def save():(out/'summary.json').write_text(redact(json.dumps(report,indent=2))+'\n')
 def execute(args,env=None,cwd=None):
@@ -98,7 +98,7 @@ try:
   if 'Elixir 1.18.4' not in probe.stdout:raise RuntimeError('Pinned Elixir is not active under repository identity: '+probe.stdout[-500:])
   for cmd in [['mix','local.hex','--force'],['mix','local.rebar','--force']]:subprocess.run(cmd,env=safeenv,cwd='/home/autoapitest',user=user.pw_uid,group=user.pw_gid,extra_groups=[],check=True)
  node=execute(['which','node'])
- if execute([node,'--version']) not in ['v22.22.0','v24.20.0','v24.21.0']:raise RuntimeError('Pinned Node runtime is not active: '+execute([node,'--version'])+' at '+node)
+ if execute([node,'--version']) not in ['v24.21.0','v26.11.1']:raise RuntimeError('Pinned Node runtime is not active: '+execute([node,'--version'])+' at '+node)
  credential_env={**safeenv,'GH_TOKEN':operator}
  credential_probe=subprocess.run(['gh','auth','git-credential','get'],input='protocol=https\nhost=github.com\n\n',capture_output=True,text=True,env=credential_env,cwd='/home/autoapitest',user=user.pw_uid,group=user.pw_gid,extra_groups=[],timeout=30)
  if credential_probe.returncode or ('password='+operator) not in credential_probe.stdout:raise RuntimeError('Unprivileged publication credential helper is not ready: '+redact(credential_probe.stderr[-1000:]))
