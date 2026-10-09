@@ -105,7 +105,7 @@ jobs:
           path: encrypted-evidence/*
   repository:
     if: inputs.phase == 'full' || inputs.phase == 'baseline' || inputs.phase == 'upstream_control'
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.source == 'elixir-plug/plug' && 'ubuntu-22.04' || 'ubuntu-24.04' }}
     timeout-minutes: 150
     environment: oss25-current-20261008
     strategy:
@@ -129,7 +129,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo sysctl -w kernel.yama.ptrace_scope=2
-          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          if [ -e /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]; then sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0; fi
           sudo useradd --create-home --shell /bin/bash autoapitest
           sudo rm -rf /usr/local/lib/android /usr/share/dotnet /usr/share/swift
           curl -fsSL -o /tmp/bun.zip https://github.com/oven-sh/bun/releases/download/bun-v1.4.2/bun-linux-x64.zip
@@ -173,12 +173,12 @@ jobs:
           java-version: '17'
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.source == 'psf/requests' && '3.10' || '3.11' }}
+          python-version: ${{ matrix.source == 'psf/requests' && '3.10' || matrix.source == 'fastapi/fastapi' && '3.13' || '3.11' }}
       - uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124
         if: matrix.source == 'elixir-plug/plug'
         with:
-          otp-version: '27.3'
-          elixir-version: '1.18.4'
+          otp-version: '28.5.0.7'
+          elixir-version: '1.19.6'
       - name: Prepare verified Maven required by frozen Gson plugins
         if: matrix.source == 'google/gson'
         run: |

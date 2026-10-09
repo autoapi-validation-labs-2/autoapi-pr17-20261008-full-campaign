@@ -94,8 +94,9 @@ try:
   with pathlib.Path('/etc/hosts').open('a') as hosts:hosts.write('\n'+hostlines+'\n')
   report['upstream_wpt_loopback_hosts']='prepared and loopback-only validated'
  if item['source']=='elixir-plug/plug':
+  safeenv.update(MIX_ENV='test',PLUG_CRYPTO_2_0='true')
   probe=subprocess.run(['elixir','--version'],env=safeenv,cwd='/home/autoapitest',user=user.pw_uid,group=user.pw_gid,extra_groups=[],capture_output=True,text=True,check=True)
-  if 'Elixir 1.18.4' not in probe.stdout:raise RuntimeError('Pinned Elixir is not active under repository identity: '+probe.stdout[-500:])
+  if 'Elixir 1.19.6' not in probe.stdout:raise RuntimeError('Pinned Elixir is not active under repository identity: '+probe.stdout[-500:])
   for cmd in [['mix','local.hex','--force'],['mix','local.rebar','--force']]:subprocess.run(cmd,env=safeenv,cwd='/home/autoapitest',user=user.pw_uid,group=user.pw_gid,extra_groups=[],check=True)
  node=execute(['which','node'])
  if execute([node,'--version']) not in ['v24.21.0','v26.11.1']:raise RuntimeError('Pinned Node runtime is not active: '+execute([node,'--version'])+' at '+node)

@@ -53,7 +53,7 @@ try{
  if(target==='sinatra/sinatra')for(const name of ['rack','rack_session','puma','tilt','zeitwerk'])process.env[name]='stable';
  if(target==='pallets/flask')process.env.TOX_ENV='py3.11';
  if(target==='gin-gonic/gin')process.env.TESTTAGS='';
- if(target==='elixir-plug/plug')process.env.MIX_ENV='test';
+ if(target==='elixir-plug/plug'){process.env.MIX_ENV='test';process.env.PLUG_CRYPTO_2_0='true';}
  const commands=config.commands;
  for(const command of commands){
   if(target==='guzzle/guzzle'&&command.executable==='./vendor/bin/phpunit'){
