@@ -7,7 +7,7 @@ const [product, source, out] = process.argv.slice(2);
 const {runRepositoryValidationCommand} = await import(pathToFileURL(path.join(product,'packages/part-a/src/replay/dependencyVersionBumpExecutor.ts')));
 const input=JSON.parse(process.env.PUBLISHED_PIN_JSON),pins=Array.isArray(input)?input:[input];
 const target=process.env.TARGET_SOURCE;
-if(!['elixir-plug/plug','pallets/flask','fastapi/fastapi','gofiber/fiber','slimphp/Slim','psf/requests'].includes(target))throw new Error('No independently qualified scoped producer');
+if(!['elixir-plug/plug','pallets/flask','fastapi/fastapi','gofiber/fiber','slimphp/Slim','psf/requests','guzzle/guzzle','google/gson'].includes(target))throw new Error('No independently qualified scoped producer');
 const git=(...args)=>execFileSync('git',['-C',source,...args],{encoding:'utf8',maxBuffer:32*1024*1024});
 const record={scope:'Independent additional validation of exact published changes; supplements and does not alter product receipts',source:target,started_at:new Date().toISOString(),updates:[],status:'running'};
 const save=()=>fs.writeFile(path.join(out,'published-control.json'),JSON.stringify(record,null,2)+'\n');
@@ -43,7 +43,7 @@ for(const pin of pins){
  }else{
   clean(pin.head_sha);
   const {code,phase}=await producer(dir);update.phases.push(phase);update.status=code===0&&phase.status==='passed'?'passed':'published_producer_failed';
-  if(target==='slimphp/Slim')update.resolved_target=JSON.parse(execFileSync('composer',['show','phpunit/phpunit','--format=json'],{cwd:source,env:process.env,encoding:'utf8'}));
+  if(target==='slimphp/Slim'){try{update.resolved_target=JSON.parse(execFileSync('composer',['show','phpunit/phpunit','--format=json'],{cwd:source,env:process.env,encoding:'utf8'}));}catch(error){update.resolved_target_error=String(error);}}
  }
  await save();clean(pin.base_sha);
 }

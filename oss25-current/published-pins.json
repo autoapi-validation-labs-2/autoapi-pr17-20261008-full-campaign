@@ -98,5 +98,93 @@
       "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-psf-requests/pull/1",
       "published_patch_sha256": "2f13342ce0d28b3594e93df9042ce7c5b53ff70138a457896fedc069c1ff743f"
     }
+  ],
+  "guzzle/guzzle": [
+    {
+      "head_sha": "567c22c3e41dcbb72f6b975062b61e6c86e1ac34",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/9",
+      "published_patch_sha256": "68954f9670a920f8a7a319f27cd532c7a24e61ffbd955b4a91bcbc6f8a1fbd17"
+    },
+    {
+      "head_sha": "455fa673ef9752acafe8f1c8ff2292a9287f9f60",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/8",
+      "published_patch_sha256": "a087c705e3ac4db7388d6adbbe22e37b7de7854d55b1fac1cdcba696085ea513"
+    },
+    {
+      "head_sha": "12d88642467d94dc381e20de5fba1446789101cc",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/7",
+      "published_patch_sha256": "2ea903f0cb864aa8da1edf9cd56cf69f3834a9ddab9ae9aa8e4589f136d1f028"
+    },
+    {
+      "head_sha": "d12710db2601c763420bb90891b7a9ed72471dca",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/6",
+      "published_patch_sha256": "2a2518a63bc6c5a9b4f67a82ae5f45a2eb446c8846a9207a25e1f9ee9bebf2da"
+    },
+    {
+      "head_sha": "c5284a2cee72183747a29b43085c8ec892b04f88",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/5",
+      "published_patch_sha256": "3785ef88952431b01c09ee783d8d35002663411f6145195940250d498c2e54c3"
+    },
+    {
+      "head_sha": "275e551a9dfc79a976fcbec450111ca309385e69",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/4",
+      "published_patch_sha256": "84257bccb8f5414e0e791ffea04a0bbbde697efc5b52b137b08f6f395464b1ff"
+    },
+    {
+      "head_sha": "61ff43912701b60e22d018d374c4ce74c3b50819",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/3",
+      "published_patch_sha256": "724cd2a58e37ecedec50b7fa998d40b0dab9cb023429187ff1aac48ab229e583"
+    },
+    {
+      "head_sha": "dda6409c3bbc301e2cbe03110b0df45fe824d466",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/2",
+      "published_patch_sha256": "49bc67e8a66c567d85d5d4665db26c0b51257a388c083ffce28589c95bc27f7f"
+    },
+    {
+      "head_sha": "2fb8036b7ffc0681922da57b28315cccded2c15f",
+      "base_sha": "93939470950a9b11e2e84204166ef5e048c55fe4",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-guzzle-guzzle/pull/1",
+      "published_patch_sha256": "4f84c6d2339267c997b70e34b324f4fb18bcfe88237a87e8266d8a4bd92b1051"
+    }
+  ],
+  "google/gson": [
+    {
+      "head_sha": "6dc73599fd0a23d8f50bfa9a34d540b674c5d113",
+      "base_sha": "845664ba1c307e6c1910d07cfed2f622e0ad8df1",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-google-gson/pull/5",
+      "published_patch_sha256": "09871bdccabc86b0ea82e7b633957fa3b84fb2b97ea7214f8a289e78752c7616"
+    },
+    {
+      "head_sha": "3e38fd6c44d5124de6c189e0a86955a5896c8da3",
+      "base_sha": "845664ba1c307e6c1910d07cfed2f622e0ad8df1",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-google-gson/pull/4",
+      "published_patch_sha256": "dd4a177848b9b54346699f50bbce16ace3bbe52d3ca1c5237ba6dc6de1478bc3"
+    },
+    {
+      "head_sha": "2162fb376eda5a28d8867b7f5e25a53a92b637bc",
+      "base_sha": "845664ba1c307e6c1910d07cfed2f622e0ad8df1",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-google-gson/pull/3",
+      "published_patch_sha256": "eb0f51299d12bc97048334f7fddc77617ab7861e00fb76ffe15ac4d3b4be6393"
+    },
+    {
+      "head_sha": "68f3115adcebd4a503d3d3882688638a9c803b2a",
+      "base_sha": "845664ba1c307e6c1910d07cfed2f622e0ad8df1",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-google-gson/pull/2",
+      "published_patch_sha256": "c9a3e416e99cff1a5d4f19997702140b4130f00c6739d3097af5dbdf91652e5f"
+    },
+    {
+      "head_sha": "99dd83ef9baa8b4b01d781226a3e8cf7a101847a",
+      "base_sha": "845664ba1c307e6c1910d07cfed2f622e0ad8df1",
+      "url": "https://github.com/APPNINJAS123/autoapi-pr17-20261009-google-gson/pull/1",
+      "published_patch_sha256": "0e6425e017f57a8b0efb4bb0b0fd3ec7098cc27a89593d0ec0376064a64a2a6d"
+    }
   ]
 }
